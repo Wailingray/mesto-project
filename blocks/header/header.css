@@ -1,0 +1,10 @@
+.header {
+  grid-area: header;
+  display: flex;
+  justify-content: space-between; /*позволит верно позиционировать ссылки на другие языки страницы в будущем*/
+  align-items: flex-start;
+  min-height: 74px;
+  min-width: 880px;
+  border-bottom: solid rgba(84, 84, 84, 0.7) 1px;
+  padding-top: 45px;
+}
