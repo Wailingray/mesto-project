@@ -1,5 +1,7 @@
 .card__image {
   border-radius: 10px 10px 0 0;
+  object-fit: contain;
+  object-position: center;
   width: 282px;
   height: 282px;
 }
