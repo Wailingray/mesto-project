@@ -1,0 +1,10 @@
+.profile {
+  grid-area: profile;
+  padding-top: 40px;
+  padding-bottom: 50px;
+  display: grid;
+  grid-template-columns: min-content min-content 1fr min-content;
+  justify-items: flex-end;
+  align-items: center;
+  max-width: 880px;
+}
