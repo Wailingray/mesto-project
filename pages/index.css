@@ -15,9 +15,11 @@
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 /*cards*/
 @import url(../blocks/cards/cards.css);
-@import url(../blocks/cards/__image/cards__image.css);
-@import url(../blocks/cards/__item/cards__item.css);
-@import url(../blocks/cards/__like-button/cards__like-button.css);
-@import url(../blocks/cards/__like-button/cards__like-button_active.css);
-@import url(../blocks/cards/__like-button/cards__like-button_disabled.css);
-@import url(../blocks/cards/__title/cards__title.css);
+/*card*/
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__image/card__image.css);
+@import url(../blocks/card/__caption/card__caption.css);
+@import url(../blocks/card/__like-button/card__like-button.css);
+@import url(../blocks/card/__like-button/card__like-button_active.css);
+@import url(../blocks/card/__like-button/card__like-button_disabled.css);
+@import url(../blocks/card/__title/card__title.css);
