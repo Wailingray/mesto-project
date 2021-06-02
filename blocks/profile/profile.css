@@ -3,8 +3,17 @@
   padding-top: 40px;
   padding-bottom: 50px;
   display: grid;
-  grid-template-columns: min-content min-content 1fr min-content;
-  justify-items: flex-end;
+  grid-template-columns: min-content  1fr 150px;;
+  justify-items: flex-start;
   align-items: center;
   max-width: 880px;
+}
+
+@media screen and (max-width: 767px) {
+  .profile {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding-top: 42px;
+    padding-bottom: 36px;
+  }
 }
