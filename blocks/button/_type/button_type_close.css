@@ -1,0 +1,8 @@
+.button_type_close {
+  background-image: url(../../../images/сlose-icon.svg);
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

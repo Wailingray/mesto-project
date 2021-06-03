@@ -1,6 +1,9 @@
 .popup__item {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  padding-bottom: 9px;
+  margin-top: 30px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   width: 358px;
@@ -10,4 +13,8 @@
   font-weight: 400;
   line-height: 122%;
   text-align: left;
+}
+
+.popup__item:first-of-type {
+  margin-top: 0;
 }

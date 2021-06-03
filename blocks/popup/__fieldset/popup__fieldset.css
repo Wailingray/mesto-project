@@ -1,4 +1,5 @@
 .popup__fieldset {
+  margin: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
