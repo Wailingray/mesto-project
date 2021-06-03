@@ -1,4 +1,5 @@
 .button {
   border: solid #fff;
   cursor: pointer;
+  box-sizing: border-box;
 }

@@ -1,5 +1,4 @@
 .profile {
-  grid-area: profile;
   padding-top: 40px;
   padding-bottom: 50px;
   display: grid;
@@ -9,7 +8,7 @@
   max-width: 880px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 800px) {
   .profile {
     grid-template-columns: 1fr;
     justify-items: center;

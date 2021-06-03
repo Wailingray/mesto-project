@@ -9,13 +9,13 @@
   justify-items: flex-start;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 800px) {
   .profile__info {
-    margin-left: 0;
+    margin-left: 27px;
     margin-top: 26px;
-    margin-bottom: 36px;
+    margin-bottom: 33px;
     min-width: 2px;
-    row-gap: 14px;
+    row-gap: 8px;
     column-gap: 10px;
     align-items: baseline;
     justify-items: center;

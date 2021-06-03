@@ -4,13 +4,12 @@
   border: 1px solid #FFFFFF;
   border-radius: 1px;
   background-image: url(/images/edit-button.svg);
-  background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 10px 10px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 800px) {
   .button_type_edit {
     height: 18px;
     width: 18px;

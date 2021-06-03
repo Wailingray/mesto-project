@@ -8,3 +8,10 @@
     padding-right: 50px;
   }
 }
+
+@media screen and (max-width: 800px) {
+  .page__section {
+    padding-left: 19px;
+    padding-right: 19px;
+  }
+}
