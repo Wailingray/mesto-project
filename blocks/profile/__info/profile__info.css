@@ -1,9 +1,10 @@
 .profile__info {
   margin-left: 30px;
+  /* margin-bottom: 3px; */
   min-width: 336px;
   display: grid;
   grid-template-columns: 1fr min-content;
-  row-gap: 16px;
+  row-gap: 10px;
   column-gap: 18px;
   align-items: baseline;
   justify-items: flex-start;
