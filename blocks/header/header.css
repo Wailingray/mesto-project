@@ -8,6 +8,7 @@
   border-bottom: solid rgba(84, 84, 84, 0.7) 1px;
   padding-top: 45px;
 }
+
 @media screen and (max-width: 767px) {
   .header {
     padding-top: 28px;
