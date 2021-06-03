@@ -1,0 +1,11 @@
+.card__like-button {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 22px;
+  height: 19px;
+}
+
+.card__like-button:hover {
+  opacity: 0.5;
+}
