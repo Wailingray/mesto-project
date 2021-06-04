@@ -4,6 +4,7 @@
   background-size: contain;
   width: 22px;
   height: 19px;
+  margin-right: 2px;
 }
 
 .card__like-button:hover {
