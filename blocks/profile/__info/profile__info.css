@@ -1,6 +1,5 @@
 .profile__info {
   margin-left: 30px;
-  /* margin-bottom: 3px; */
   min-width: 336px;
   display: grid;
   grid-template-columns: 1fr min-content;
