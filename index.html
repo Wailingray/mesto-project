@@ -3,23 +3,28 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Ваша личная карточка путешественника"
-    />
+    <meta name="description" content="Ваша личная карточка путешественника" />
     <meta name="keywords" content="HTML5, CSS3" />
     <meta name="author" content="Иван Сергеев" />
     <title>Путешествия по России</title>
-    <link type="image/png" sizes="16x16" rel="icon" href="images/logo.svg">
+    <link type="image/png" sizes="16x16" rel="icon" href="images/logo.svg" />
     <link rel="stylesheet" href="pages/index.css" />
   </head>
   <body class="page">
     <header class="header page__section">
-      <img src="/images/logo.svg" alt="Логотип Mesto russia" class="header__logo">
+      <img
+        src="/images/logo.svg"
+        alt="Логотип Mesto russia"
+        class="header__logo"
+      />
     </header>
     <main>
       <section class="profile page__section">
-        <img src="/images/avatar.png" alt="Ваша фотография (по умолчанию тут фото Жака Кусто)" class="profile__avatar">
+        <img
+          src="/images/avatar.png"
+          alt="Ваша фотография (по умолчанию тут фото Жака Кусто)"
+          class="profile__avatar"
+        />
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="button button_type_edit" type="button"></button>
@@ -29,62 +34,118 @@
       </section>
       <section class="cards page__section">
         <figure class="card">
-          <img src="/images/grid-karachaevsk.jpg" alt="Разрушенная церковь в Карачаевске" class="card__image">
+          <img
+            src="/images/grid-karachaevsk.jpg"
+            alt="Разрушенная церковь в Карачаевске"
+            class="card__image"
+          />
           <div class="card__caption">
             <figcaption class="card__title">Карачаево-Черкесия</figcaption>
-            <button class="button card__like-button card__like-button_active" type="button"></button>
+            <button
+              class="button card__like-button card__like-button_active"
+              type="button"
+            ></button>
           </div>
         </figure>
         <figure class="card">
-          <img src="/images/grid-elbrus.png" alt="Эльбрус в лучах заката" class="card__image">
+          <img
+            src="/images/grid-elbrus.png"
+            alt="Эльбрус в лучах заката"
+            class="card__image"
+          />
           <div class="card__caption">
             <figcaption class="card__title">Гора Эльбрус</figcaption>
-            <button class="button card__like-button card__like-button_disabled" type="button"></button>
+            <button
+              class="button card__like-button card__like-button_disabled"
+              type="button"
+            ></button>
           </div>
         </figure>
         <figure class="card">
-          <img src="/images/grid-dombai.png" alt="Грозные пики Домбай-Ульген" class="card__image">
+          <img
+            src="/images/grid-dombai.png"
+            alt="Грозные пики Домбай-Ульген"
+            class="card__image"
+          />
           <div class="card__caption">
             <figcaption class="card__title">Домбай</figcaption>
-            <button class="button card__like-button card__like-button_disabled" type="button"></button>
+            <button
+              class="button card__like-button card__like-button_disabled"
+              type="button"
+            ></button>
           </div>
         </figure>
         <figure class="card">
-          <img src="/images/grid-krym.jpg" alt="Ласточкино Гнездо" class="card__image">
+          <img
+            src="/images/grid-krym.jpg"
+            alt="Ласточкино Гнездо"
+            class="card__image"
+          />
           <div class="card__caption">
             <figcaption class="card__title">Крым</figcaption>
-            <button class="button card__like-button card__like-button_disabled" type="button"></button>
+            <button
+              class="button card__like-button card__like-button_disabled"
+              type="button"
+            ></button>
           </div>
         </figure>
         <figure class="card">
-          <img src="/images/grid-gubakha.jpg" alt="Призраки Урала" class="card__image">
+          <img
+            src="/images/grid-gubakha.jpg"
+            alt="Призраки Урала"
+            class="card__image"
+          />
           <div class="card__caption">
             <figcaption class="card__title">Старая Губанка</figcaption>
-            <button class="button card__like-button card__like-button_disabled" type="button"></button>
+            <button
+              class="button card__like-button card__like-button_disabled"
+              type="button"
+            ></button>
           </div>
         </figure>
         <figure class="card">
-          <img src="/images/grid-putoran.jpg" alt="Древнее плато в Сибири" class="card__image">
+          <img
+            src="/images/grid-putoran.jpg"
+            alt="Древнее плато в Сибири"
+            class="card__image"
+          />
           <div class="card__caption">
             <figcaption class="card__title">Плато Путорана</figcaption>
-            <button class="button card__like-button card__like-button_disabled" type="button"></button>
+            <button
+              class="button card__like-button card__like-button_disabled"
+              type="button"
+            ></button>
           </div>
         </figure>
       </section>
     </main>
     <footer class="footer page__section">
-      <p class="footer__copyright">
-        &copy; 2021 Mesto Russia
-      </p>
+      <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
     </footer>
     <div class="popup popup_opened1">
       <div class="popup__container">
         <form class="popup__form">
           <legend class="popup__title">Редактировать профиль</legend>
           <fieldset class="popup__fieldset">
-            <input class="popup__item" type="text" id="name" required placeholder="Введите имя путешественника"  value="Жак-Ив Кусто">
-            <input class="popup__item" type="text" id="passion" required placeholder="Введите его призвание"  value="Исследователь океана">
-            <button class='popup__button button' type='submit'>Сохранить</button>
+            <input
+              class="popup__item"
+              type="text"
+              id="name"
+              required
+              placeholder="Введите имя путешественника"
+              value="Жак-Ив Кусто"
+            />
+            <input
+              class="popup__item"
+              type="text"
+              id="passion"
+              required
+              placeholder="Введите его призвание"
+              value="Исследователь океана"
+            />
+            <button class="popup__button button" type="submit">
+              Сохранить
+            </button>
           </fieldset>
           <button class="button button_type_close"></button>
         </form>
