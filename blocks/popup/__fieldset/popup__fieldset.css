@@ -8,3 +8,9 @@
   border: none;
   width: 358px;
 }
+
+@media screen and (max-width: 800px) {
+  .popup__fieldset {
+    width: 238px;
+  }
+}
