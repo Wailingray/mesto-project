@@ -1,5 +1,4 @@
 .profile__info {
-  margin-left: 30px;
   min-width: 336px;
   display: grid;
   grid-template-columns: 1fr min-content;
@@ -14,10 +13,8 @@
     margin-left: 27px;
     margin-top: 26px;
     margin-bottom: 33px;
-    min-width: 2px;
+    min-width: 1px;
     row-gap: 8px;
     column-gap: 10px;
-    align-items: baseline;
-    justify-items: center;
   }
 }

@@ -9,11 +9,17 @@
   color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 @media screen and (max-width: 800px) {
   .profile__description {
     font-size: 14px;
     line-height: 121%;
+    max-width: 500px;
+    margin-left: 16px;
   }
 }

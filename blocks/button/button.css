@@ -5,6 +5,7 @@
   background-color: transparent;
   cursor: pointer;
   box-sizing: border-box;
+  transition: 0.2s linear;
 }
 
 button:hover {

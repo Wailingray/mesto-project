@@ -7,4 +7,5 @@
   padding-top: 25px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: inherit;
 }

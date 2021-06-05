@@ -7,7 +7,7 @@
     <meta name="description" content="Ваша личная коллекция путешественника" />
     <meta name="keywords" content="HTML5, CSS3" />
     <meta name="author" content="Иван Сергеев" />
-    <title>Путешествия по России</title>
+    <title>Проект Mesto</title>
     <link type="image/png" sizes="16x16" rel="icon" href="images/logo.svg" />
     <link rel="stylesheet" href="pages/index.css" />
   </head>
@@ -22,19 +22,21 @@
     <main>
       <section class="profile page__section">
         <img
-          src="images/avatar.png"
+          src="images/avatar.jpg"
           alt="Ваша фотография (по умолчанию тут фото Жака Кусто)"
           class="profile__avatar"
         />
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="button button_type_edit" type="button"></button>
+          <button class="button button_type_edit" aria-label="Изменить"
+          type="button"></button>
           <p class="profile__description">Исследователь океана</p>
         </div>
-        <button class="button button_type_add" type="button"></button>
+        <button class="button button_type_add" aria-label="Добавить"
+        type="button"></button>
       </section>
       <section class="cards page__section">
-        <figure class="card">
+        <article class="card">
           <img
             src="images/grid-karachaevsk.jpg"
             alt="Разрушенная церковь в Карачаевске"
@@ -47,8 +49,8 @@
               type="button"
             ></button>
           </div>
-        </figure>
-        <figure class="card">
+        </article>
+        <article class="card">
           <img
             src="images/grid-elbrus.png"
             alt="Эльбрус в лучах заката"
@@ -61,8 +63,8 @@
               type="button"
             ></button>
           </div>
-        </figure>
-        <figure class="card">
+        </article>
+        <article class="card">
           <img
             src="images/grid-dombai.png"
             alt="Грозные пики Домбай-Ульген"
@@ -75,8 +77,8 @@
               type="button"
             ></button>
           </div>
-        </figure>
-        <figure class="card">
+        </article>
+        <article class="card">
           <img
             src="images/grid-krym.jpg"
             alt="Ласточкино Гнездо"
@@ -89,8 +91,8 @@
               type="button"
             ></button>
           </div>
-        </figure>
-        <figure class="card">
+        </article>
+        <article class="card">
           <img
             src="images/grid-gubakha.jpg"
             alt="Призраки Урала"
@@ -103,8 +105,8 @@
               type="button"
             ></button>
           </div>
-        </figure>
-        <figure class="card">
+        </article>
+        <article class="card">
           <img
             src="images/grid-putoran.jpg"
             alt="Древнее плато в Сибири"
@@ -117,21 +119,22 @@
               type="button"
             ></button>
           </div>
-        </figure>
+        </article>
       </section>
     </main>
     <footer class="footer page__section">
       <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
     </footer>
-    <div class="popup popup_opened">
+    <div class="popup">
       <div class="popup__container">
-        <form class="popup__form">
+        <form class="popup__form" name="editForm">
           <h2 class="popup__title">Редактировать профиль</h2>
           <fieldset class="popup__fieldset">
             <input
               class="popup__item"
               type="text"
               id="name"
+              name="userName"
               required
               placeholder="Введите имя путешественника"
               value="Жак-Ив Кусто"
@@ -140,6 +143,7 @@
               class="popup__item"
               type="text"
               id="passion"
+              name="userJob"
               required
               placeholder="Введите его призвание"
               value="Исследователь океана"
@@ -148,8 +152,8 @@
               Сохранить
             </button>
           </fieldset>
-          <button class="button button_type_close"></button>
         </form>
+        <button class="button button_type_close" type="button"></button>
       </div>
     </div>
   </body>
