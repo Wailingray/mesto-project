@@ -1,10 +1,20 @@
 let editButton = document.querySelector('.button_type_edit');
-let closeButton = document.querySelector('.button_type_close');
-let popup = document.querySelector('.popup');
+let addButton =  document.querySelector('.button_type_add');
+let authorCloseButton = document.querySelector('.button_type_author');
+let placeCloseButton = document.querySelector('.button_type_place');
+let AuthorPopup = document.querySelector('.popup_type_author');
+let CardPopup = document.querySelector('.popup_type_card');
 
-function togglePopup() {
-  popup.classList.toggle('popup_opened');
+function toggleAuthorPopup() {
+  AuthorPopup.classList.toggle('popup_opened');
 }
 
-editButton.addEventListener('click', togglePopup);
-closeButton.addEventListener('click', togglePopup);
+function toggleCardPopup() {
+  CardPopup.classList.toggle('popup_opened');
+}
+
+editButton.addEventListener('click', toggleAuthorPopup);
+authorCloseButton.addEventListener('click', toggleAuthorPopup);
+addButton.addEventListener('click', toggleCardPopup);
+placeCloseButton.addEventListener('click', toggleCardPopup);
+
