@@ -1,5 +1,5 @@
 .profile__info {
-  min-width: 336px;
+  /*min-width: 336px;*/
   display: grid;
   grid-template-columns: 1fr min-content;
   row-gap: 10px;

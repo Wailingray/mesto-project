@@ -1,3 +1,4 @@
+// Открытие/закрытие форм
 let editButton = document.querySelector('.button_type_edit');
 let addButton =  document.querySelector('.button_type_add');
 let authorCloseButton = document.querySelector('.button_type_author');
@@ -18,3 +19,25 @@ authorCloseButton.addEventListener('click', toggleAuthorPopup);
 addButton.addEventListener('click', toggleCardPopup);
 placeCloseButton.addEventListener('click', toggleCardPopup);
 
+//Submit
+// Находим форму в DOM
+const formElement = document.querySelector('.popup_type_author .popup__form');
+// Находим поля формы в DOM
+const nameInput = formElement.querySelector('#name');
+const jobInput = formElement.querySelector('#passion');
+
+// Обработчик «отправки» формы
+function formSubmitHandler (evt) {
+    evt.preventDefault();
+    // Получите значение полей jobInput и nameInput из свойства value
+    let nameValue = nameInput.value;
+    let jobValue = jobInput.value;
+    // Выберите элементы, куда должны быть вставлены значения полей
+    let profileName = document.querySelector('.profile__name');
+    let jobName = document.querySelector('.profile__description');
+    // Вставьте новые значения с помощью textContent
+    profileName.textContent = nameValue;
+    jobName.textContent = jobValue;
+}
+
+formElement.addEventListener('submit', formSubmitHandler);
