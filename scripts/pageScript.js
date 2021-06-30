@@ -38,6 +38,7 @@ function authorFormSubmitHandler (evt) {
     // Вставьте новые значения с помощью textContent
     profileName.textContent = authorNameValue;
     jobName.textContent = authorJobValue;
+    toggleAuthorPopup()
 }
 
 formElement.addEventListener('submit', authorFormSubmitHandler);
