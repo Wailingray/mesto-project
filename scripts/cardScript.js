@@ -10,7 +10,13 @@ function createCard(nameValue, imgValue) {
   cardElement.querySelector('.card__image').src = imgValue;
   cardElement.querySelector('.card__title').textContent = nameValue;
 
-  /*Добавляем слушатель на лайк*/
+  /*Добавляем слушатель удаления карточки*/
+  cardElement.querySelector('.card__delete-button').addEventListener('click', function (evt) {
+    const eventTarget = evt.target;
+    eventTarget.closest('.card').remove();
+  });
+
+  /*Добавляем слушатель лайка*/
   cardElement.querySelector('.card__like-button').addEventListener('click', function (evt) {
     const eventTarget = evt.target;
     eventTarget.classList.toggle('card__like-button_active');
