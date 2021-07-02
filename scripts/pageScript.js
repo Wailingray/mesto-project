@@ -3,14 +3,20 @@ const editButton = document.querySelector('.button_type_edit');
 const addButton =  document.querySelector('.button_type_add');
 const authorCloseButton = document.querySelector('.button_type_author');
 const placeCloseButton = document.querySelector('.button_type_place');
-const imageCloseButton = document.querySelector('.button_type_place');
+const imageCloseButton = document.querySelector('.button_type_image');
 const authorPopup = document.querySelector('.popup_type_author');
 const cardPopup = document.querySelector('.popup_type_card');
 const imagePopup = document.querySelector('.popup_type_image');
 
-/*Функции открытия закрытия попапа*/
+/*Функции открытия/закрытия попапа*/
 function togglePopup(popupElement) {
   popupElement.classList.toggle('popup_opened');
+}
+
+/*Функция открытия попапа изображения*/
+
+function openImagePopup() {
+  togglePopup(imagePopup);
 }
 
 /*Вешаем обработчики на кнопки попапов*/
@@ -58,11 +64,5 @@ function authorFormSubmitHandler (evt) {
 
 formElement.addEventListener('submit', authorFormSubmitHandler);
 
-/*Функция открытия попапа изображения*/
 
-function openImagePopup(evt) {
-  const eventTarget = evt.target;
-  imagePopup.src = eventTarget.src;
-  imagePopup.figcaption.textContent =  eventTarget.textContent;
-  imagePopup.classList.toggle('popup_opened');
-}
+
