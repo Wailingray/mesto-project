@@ -64,7 +64,7 @@ function cardFormSubmitHandler(evt) {
   placeNameInput.value = '';
   picInput.value = '';
   createCard(cardName,cardLink);
-  toggleCardPopup();
+  togglePopup(cardPopup);
 }
 
 cardForm.addEventListener('submit',cardFormSubmitHandler);

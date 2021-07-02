@@ -8,25 +8,31 @@ const authorPopup = document.querySelector('.popup_type_author');
 const cardPopup = document.querySelector('.popup_type_card');
 const imagePopup = document.querySelector('.popup_type_image');
 
-/*Функции открытия закрытия попапов*/
-function toggleAuthorPopup() {
-  authorPopup.classList.toggle('popup_opened');
-}
-
-function toggleCardPopup() {
-  cardPopup.classList.toggle('popup_opened');
-}
-
-function toggleImagePopup() {
-  imagePopup.classList.toggle('popup_opened');
+/*Функции открытия закрытия попапа*/
+function togglePopup(popupElement) {
+  popupElement.classList.toggle('popup_opened');
 }
 
 /*Вешаем обработчики на кнопки попапов*/
-imageCloseButton.addEventListener('click',toggleImagePopup);
-editButton.addEventListener('click', toggleAuthorPopup);
-authorCloseButton.addEventListener('click', toggleAuthorPopup);
-addButton.addEventListener('click', toggleCardPopup);
-placeCloseButton.addEventListener('click', toggleCardPopup);
+imageCloseButton.addEventListener('click', function() {
+  togglePopup(imagePopup);
+});
+
+editButton.addEventListener('click', function() {
+  togglePopup(authorPopup);
+});
+
+authorCloseButton.addEventListener('click', function() {
+  togglePopup(authorPopup);
+});
+
+addButton.addEventListener('click', function() {
+  togglePopup(cardPopup);
+});
+
+placeCloseButton.addEventListener('click', function() {
+  togglePopup(cardPopup);
+});
 
 //Submit
 // Находим форму в DOM
@@ -47,7 +53,7 @@ function authorFormSubmitHandler (evt) {
     // Вставьте новые значения с помощью textContent
     profileName.textContent = authorNameValue;
     jobName.textContent = authorJobValue;
-    toggleAuthorPopup();
+    togglePopup(authorPopup);
 }
 
 formElement.addEventListener('submit', authorFormSubmitHandler);
