@@ -1,19 +1,28 @@
 // Открытие/закрытие форм
-let editButton = document.querySelector('.button_type_edit');
-let addButton =  document.querySelector('.button_type_add');
-let authorCloseButton = document.querySelector('.button_type_author');
-let placeCloseButton = document.querySelector('.button_type_place');
-let AuthorPopup = document.querySelector('.popup_type_author');
-let CardPopup = document.querySelector('.popup_type_card');
+const editButton = document.querySelector('.button_type_edit');
+const addButton =  document.querySelector('.button_type_add');
+const authorCloseButton = document.querySelector('.button_type_author');
+const placeCloseButton = document.querySelector('.button_type_place');
+const imageCloseButton = document.querySelector('.button_type_place');
+const authorPopup = document.querySelector('.popup_type_author');
+const cardPopup = document.querySelector('.popup_type_card');
+const imagePopup = document.querySelector('.popup_type_image');
 
+/*Функции открытия закрытия попапов*/
 function toggleAuthorPopup() {
-  AuthorPopup.classList.toggle('popup_opened');
+  authorPopup.classList.toggle('popup_opened');
 }
 
 function toggleCardPopup() {
-  CardPopup.classList.toggle('popup_opened');
+  cardPopup.classList.toggle('popup_opened');
 }
 
+function toggleImagePopup() {
+  imagePopup.classList.toggle('popup_opened');
+}
+
+/*Вешаем обработчики на кнопки попапов*/
+imageCloseButton.addEventListener('click',toggleImagePopup);
 editButton.addEventListener('click', toggleAuthorPopup);
 authorCloseButton.addEventListener('click', toggleAuthorPopup);
 addButton.addEventListener('click', toggleCardPopup);
@@ -42,3 +51,12 @@ function authorFormSubmitHandler (evt) {
 }
 
 formElement.addEventListener('submit', authorFormSubmitHandler);
+
+/*Функция открытия попапа изображения*/
+
+function openImagePopup(evt) {
+  const eventTarget = evt.target;
+  imagePopup.src = eventTarget.src;
+  imagePopup.figcaption.textContent =  eventTarget.textContent;
+  imagePopup.classList.toggle('popup_opened');
+}

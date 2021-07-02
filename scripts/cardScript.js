@@ -1,3 +1,30 @@
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
 const cardContainer = document.querySelector('.cards');
 const cardForm = document.querySelector('.popup_type_card .popup__form');
 const placeNameInput = cardForm.querySelector('#name');
@@ -22,6 +49,9 @@ function createCard(nameValue, imgValue) {
     eventTarget.classList.toggle('card__like-button_active');
   });
 
+  /*Добавляем слушатель открытия попапа*/
+  cardElement.querySelector('.card__image').addEventListener('click', openImagePopup);
+
   cardContainer.append(cardElement);
 }
 
@@ -40,10 +70,6 @@ function cardFormSubmitHandler(evt) {
 cardForm.addEventListener('submit',cardFormSubmitHandler);
 
 /*Добавляем начальные 6 карточек*/
-createCard('Челябинская область','https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg');
-createCard('Архыз','https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg');
-createCard('Иваново','https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg');
-createCard('Камчатка','https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg');
-createCard('Холмогорский район','https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg');
-createCard('Байкал','https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg');
-
+initialCards.forEach(function (item) {
+  createCard(item.name, item.link);
+});
