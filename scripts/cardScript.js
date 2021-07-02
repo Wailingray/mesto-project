@@ -27,8 +27,7 @@ const initialCards = [
 
 const cardContainer = document.querySelector('.cards');
 const cardForm = document.querySelector('.popup_type_card .popup__form');
-const placeNameInput = cardForm.querySelector('#name');
-const picInput = cardForm.querySelector('#picture');
+
 
 /*Функция создания карточек*/
 function createCard(nameValue, imgValue) {
@@ -49,9 +48,16 @@ function createCard(nameValue, imgValue) {
     eventTarget.classList.toggle('card__like-button_active');
   });
 
+  /*Добавляем слушатель копирования содержания карточки в попап*/
+  cardElement.querySelector('.card__image').addEventListener('click', function () {
+    imagePopup.querySelector('.popup__image').setAttribute('src', imgValue);
+    imagePopup.querySelector('.popup__figcaption').textContent = nameValue;
+  });
+
   /*Добавляем слушатель открытия попапа*/
   cardElement.querySelector('.card__image').addEventListener('click', openImagePopup);
 
+  /*Вставляем узел карточки в DOM*/
   cardContainer.append(cardElement);
 }
 
@@ -59,6 +65,8 @@ function createCard(nameValue, imgValue) {
 /*Функция добавления новой карточки*/
 function cardFormSubmitHandler(evt) {
   evt.preventDefault();
+  const placeNameInput = cardForm.querySelector('#name');
+  const picInput = cardForm.querySelector('#picture');
   let cardName = placeNameInput.value;
   let cardLink = picInput.value;
   placeNameInput.value = '';
