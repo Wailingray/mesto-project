@@ -1,0 +1,12 @@
+.popup__container_type_image {
+  margin: auto 20%;
+  width: auto;
+  max-width: 100%;
+  background-color: transparent;
+}
+
+@media screen and (max-width: 800px) {
+  .popup__container {
+    width: 100%;
+  }
+}
