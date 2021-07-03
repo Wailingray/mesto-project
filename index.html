@@ -28,16 +28,20 @@
         />
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="button button_type_edit" aria-label="Изменить"
-          type="button"></button>
+          <button
+            class="button button_type_edit"
+            aria-label="Изменить"
+            type="button"
+          ></button>
           <p class="profile__description">Исследователь океана</p>
         </div>
-        <button class="button button_type_add" aria-label="Добавить"
-        type="button"></button>
+        <button
+          class="button button_type_add"
+          aria-label="Добавить"
+          type="button"
+        ></button>
       </section>
-      <section class="cards page__section">
-
-      </section>
+      <section class="cards page__section"></section>
     </main>
     <footer class="footer page__section">
       <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
@@ -70,7 +74,10 @@
             </button>
           </fieldset>
         </form>
-        <button class="button button_type_close button_type_author" type="button"></button>
+        <button
+          class="button button_type_close button_type_author"
+          type="button"
+        ></button>
       </div>
     </div>
     <div class="popup popup_type_card">
@@ -103,10 +110,13 @@
             </button>
           </fieldset>
         </form>
-        <button class="button button_type_close button_type_place" type="button"></button>
+        <button
+          class="button button_type_close button_type_place"
+          type="button"
+        ></button>
       </div>
     </div>
-    <div class="popup popup_type_image popup_opened">
+    <div class="popup popup_type_image">
       <div class="popup__container popup__container_type_image">
         <figure class="popup__figure">
           <img
@@ -114,30 +124,21 @@
             alt=""
             class="popup__image"
           />
-          <figcaption
-            class="popup__figcaption"
-          >Челябинская область</figcaption>
+          <figcaption class="popup__figcaption">Челябинская область</figcaption>
         </figure>
-        <button class="button button_type_close button_type_image" type="button"></button>
+        <button
+          class="button button_type_close button_type_image"
+          type="button"
+        ></button>
       </div>
     </div>
     <template id="card-template">
       <article class="card">
-        <img
-          src=''
-          alt='фотография места'
-          class="card__image"
-        />
-        <button
-          class="button card__delete-button"
-          type="button"
-        ></button>
+        <img src="" alt="фотография места" class="card__image" />
+        <button class="button card__delete-button" type="button"></button>
         <div class="card__caption">
           <h2 class="card__title"></h2>
-          <button
-            class="button card__like-button"
-            type="button"
-          ></button>
+          <button class="button card__like-button" type="button"></button>
         </div>
       </article>
     </template>

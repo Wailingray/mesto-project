@@ -33,8 +33,10 @@ const cardForm = document.querySelector('.popup_type_card .popup__form');
 function createCard(nameValue, imgValue) {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-  cardElement.querySelector('.card__image').src = imgValue;
+  cardElement.querySelector('.card__image').setAttribute('src', imgValue);
   cardElement.querySelector('.card__title').textContent = nameValue;
+  const altName = `Фотография местности: ${nameValue}`;
+  cardElement.querySelector('.card__image').setAttribute('alt', altName);
 
   /*Добавляем слушатель удаления карточки*/
   cardElement.querySelector('.card__delete-button').addEventListener('click', function (evt) {
@@ -51,6 +53,7 @@ function createCard(nameValue, imgValue) {
   /*Добавляем слушатель копирования содержания карточки в попап*/
   cardElement.querySelector('.card__image').addEventListener('click', function () {
     imagePopup.querySelector('.popup__image').setAttribute('src', imgValue);
+    imagePopup.querySelector('.popup__image').setAttribute('alt', altName);
     imagePopup.querySelector('.popup__figcaption').textContent = nameValue;
   });
 
@@ -75,6 +78,7 @@ function cardFormSubmitHandler(evt) {
   togglePopup(cardPopup);
 }
 
+/*Обработчик формы*/
 cardForm.addEventListener('submit',cardFormSubmitHandler);
 
 /*Добавляем начальные 6 карточек*/
