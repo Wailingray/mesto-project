@@ -41,7 +41,7 @@
           type="button"
         ></button>
       </section>
-      <section class="cards page__section"></section>
+      <section class="cards page__section" aria-label="Карточки"></section>
     </main>
     <footer class="footer page__section">
       <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
@@ -54,7 +54,7 @@
             <input
               class="popup__item"
               type="text"
-              id="name"
+              id="user"
               name="userName"
               required
               placeholder="Введите имя путешественника"
@@ -88,12 +88,11 @@
             <input
               class="popup__item"
               type="text"
-              id="name"
+              id="place"
               name="placeName"
               required
               placeholder="Название"
               value=""
-              required
             />
             <input
               class="popup__item"
@@ -103,7 +102,6 @@
               required
               placeholder="Ссылка на картинку"
               value=""
-              required
             />
             <button class="popup__button button" type="submit">
               Сохранить
