@@ -26,7 +26,7 @@ const initialCards = [
 ];
 
 const cardContainer = document.querySelector(".cards");
-const cardForm = cardPopup.querySelector("popup__form");
+const cardForm = document.querySelector(".popup_type_card .popup__form");
 
 /*Функция создания карточек*/
 function createCard(nameValue, imgValue) {
