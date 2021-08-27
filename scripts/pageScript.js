@@ -7,6 +7,7 @@ const imageCloseButton = document.querySelector(".button_type_image");
 const authorPopup = document.querySelector(".popup_type_author");
 const cardPopup = document.querySelector(".popup_type_card");
 const imagePopup = document.querySelector(".popup_type_image");
+const popups = document.querySelectorAll(".popup");
 
 /*Функции открытия/закрытия попапа*/
 function togglePopup(popupElement) {
@@ -63,3 +64,25 @@ function authorFormSubmitHandler(evt) {
 }
 
 formElement.addEventListener("submit", authorFormSubmitHandler);
+
+/*Слушатели закрытия попапа на оверлее*/
+
+popups.forEach(element => element.addEventListener('click', evt => {
+  if (evt.target.classList.contains('popup_opened')) {
+    evt.target.classList.remove('popup_opened');
+  }
+}));
+
+/* popups.forEach(element => element.addEventListener('keydown', evt => {
+  if (evt.key === 'Escape') {
+    element.remove('popup_opened');
+  }
+  console.log(evt.target);
+})); */
+
+imagePopup.addEventListener('keydown', function(evt) {
+  if(evt.key === 'Escape') {
+    imagePopup.classList.remove('popup_opened');
+  }
+  console.log(evt);
+});
