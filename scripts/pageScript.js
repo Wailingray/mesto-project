@@ -67,22 +67,17 @@ formElement.addEventListener("submit", authorFormSubmitHandler);
 
 /*Слушатели закрытия попапа на оверлее*/
 
-popups.forEach(element => element.addEventListener('click', evt => {
-  if (evt.target.classList.contains('popup_opened')) {
-    evt.target.classList.remove('popup_opened');
+popups.forEach(element => element.addEventListener("click", evt => {
+  if (evt.target.classList.contains("popup_opened")) {
+    evt.target.classList.remove("popup_opened");
   }
 }));
 
-/* popups.forEach(element => element.addEventListener('keydown', evt => {
-  if (evt.key === 'Escape') {
-    element.remove('popup_opened');
-  }
-  console.log(evt.target);
-})); */
-
-imagePopup.addEventListener('keydown', function(evt) {
-  if(evt.key === 'Escape') {
-    imagePopup.classList.remove('popup_opened');
+/*Слушатель закрытия попапа при нажатии esc */
+document.addEventListener("keydown", function(evt) {
+  if(evt.key === "Escape") {
+    document.querySelector(".popup_opened").classList.remove("popup_opened");
   }
   console.log(evt);
 });
+
