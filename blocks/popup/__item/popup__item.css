@@ -24,3 +24,7 @@
 .popup__item:invalid {
   border-bottom: 1px solid #b22222;
 }
+
+.popup__item::placeholder {
+  color: #C4C4C4;
+}

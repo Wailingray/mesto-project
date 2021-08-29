@@ -45,28 +45,25 @@ placeCloseButton.addEventListener("click", function () {
 // Находим форму в DOM
 const formElement = authorPopup.querySelector(".popup__form");
 // Находим поля формы в DOM
-const authorNameInput = formElement.querySelector("#user");
-const jobInput = formElement.querySelector("#passion");
+const authorNameInput = formElement.elements.userName;
+const jobInput = formElement.elements.userJob;
 
 // Обработчик «отправки» формы
 function authorFormSubmitHandler(evt) {
   evt.preventDefault();
 
-  let authorNameValue = authorNameInput.value;
-  let authorJobValue = jobInput.value;
-
   let profileName = document.querySelector(".profile__name");
   let jobName = document.querySelector(".profile__description");
 
-  profileName.textContent = authorNameValue;
-  jobName.textContent = authorJobValue;
+  profileName.textContent = authorNameInput.value;
+  jobName.textContent = jobInput.value;
+  formElement.reset()
   togglePopup(authorPopup);
 }
 
 formElement.addEventListener("submit", authorFormSubmitHandler);
 
 /*Слушатели закрытия попапа на оверлее*/
-
 popups.forEach(element => element.addEventListener("click", evt => {
   if (evt.target.classList.contains("popup_opened")) {
     evt.target.classList.remove("popup_opened");
