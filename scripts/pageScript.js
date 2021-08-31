@@ -75,6 +75,5 @@ document.addEventListener("keydown", function(evt) {
   if(evt.key === "Escape") {
     document.querySelector(".popup_opened").classList.remove("popup_opened");
   }
-  console.log(evt);
 });
 
