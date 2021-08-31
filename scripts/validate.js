@@ -34,7 +34,6 @@ const toggleButtonState = (inputList, buttonElement) => {
     buttonElement.classList.remove('popup__button_disabled');
     buttonElement.removeAttribute('disabled', 'disabled');
   }
-
 };
 
 const setEventListeners = (formElement) => {

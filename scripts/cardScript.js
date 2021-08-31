@@ -78,9 +78,13 @@ function cardFormSubmitHandler(evt) {
   const picInput = cardForm.querySelector("#url-input");
   const cardName = placeNameInput.value;
   const cardLink = picInput.value;
-  placeNameInput.value = "";
-  picInput.value = "";
+  cardForm.reset()
   createCard(cardName, cardLink);
+  /*Делаем кнопку неактивной*/
+  const inputList = Array.from(cardForm.querySelectorAll('.popup__item'));
+  const buttonElement = cardForm.querySelector('.popup__button');
+  toggleButtonState(inputList, buttonElement);
+  /*Закрываем попап*/
   togglePopup(cardPopup);
 }
 

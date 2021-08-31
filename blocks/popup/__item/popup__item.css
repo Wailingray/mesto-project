@@ -21,6 +21,9 @@
   margin-top: 0;
 }
 
+.popup__item:focus {
+  outline: none;
+}
 .popup__item:invalid {
 
 }

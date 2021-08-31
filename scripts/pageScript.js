@@ -54,18 +54,26 @@ function authorFormSubmitHandler(evt) {
 
   let profileName = document.querySelector(".profile__name");
   let jobName = document.querySelector(".profile__description");
+  let profileValue = document.querySelector("#userName-input");
+  let jobValue = document.querySelector("#userJob-input");
 
   profileName.textContent = authorNameInput.value;
   jobName.textContent = jobInput.value;
+  profileValue.setAttribute('value', authorNameInput.value);
+  jobValue.setAttribute('value', jobInput.value);
   formElement.reset()
-  enableValidation();
+  /*Делаем кнопку неактивной*/
+  const inputList = Array.from(formElement.querySelectorAll('.popup__item'));
+  const buttonElement = formElement.querySelector('.popup__button');
+  toggleButtonState(inputList, buttonElement);
+  /*Закрываем попап*/
   togglePopup(authorPopup);
 }
 
 formElement.addEventListener("submit", authorFormSubmitHandler);
 
 /*Слушатели закрытия попапа на оверлее*/
-popupList.forEach(element => element.addEventListener("click", evt => {
+popupList.forEach(element => element.addEventListener("mousedown", evt => {
   if (evt.target.classList.contains("popup_opened")) {
     evt.target.classList.remove("popup_opened");
   }
