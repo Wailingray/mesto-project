@@ -1,0 +1,10 @@
+.popup__item-error {
+  margin-top: 5px;
+  align-self: flex-start;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 125%;
+  font-style: normal;
+  font-weight: 400;
+  color: #FF0000;
+}
