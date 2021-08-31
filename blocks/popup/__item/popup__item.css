@@ -22,7 +22,7 @@
 }
 
 .popup__item:invalid {
-  border-bottom: 1px solid #FF0000;
+
 }
 
 .popup__item::placeholder {
