@@ -58,6 +58,7 @@ function authorFormSubmitHandler(evt) {
   profileName.textContent = authorNameInput.value;
   jobName.textContent = jobInput.value;
   formElement.reset()
+  enableValidation();
   togglePopup(authorPopup);
 }
 

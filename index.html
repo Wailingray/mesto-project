@@ -59,6 +59,8 @@
               required
               placeholder="Введите имя путешественника"
               value=""
+              minlength="2"
+              maxlength="40"
             />
             <span class="popup__item-error userName-input-error"></span>
             <input
@@ -69,9 +71,11 @@
               required
               placeholder="Введите его призвание"
               value=""
+              minlength="2"
+              maxlength="200"
             />
             <span class="popup__item-error userJob-input-error"></span>
-            <button class="popup__button button" type="submit">
+            <button class="popup__button button disabled" type="submit">
               Сохранить
             </button>
           </fieldset>
