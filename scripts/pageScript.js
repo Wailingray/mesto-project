@@ -54,13 +54,12 @@ function authorFormSubmitHandler(evt) {
 
   let profileName = document.querySelector(".profile__name");
   let jobName = document.querySelector(".profile__description");
-  let profileValue = document.querySelector("#userName-input");
-  let jobValue = document.querySelector("#userJob-input");
 
   profileName.textContent = authorNameInput.value;
   jobName.textContent = jobInput.value;
-  profileValue.setAttribute('value', authorNameInput.value);
-  jobValue.setAttribute('value', jobInput.value);
+  /*Обновляем value полей ввода*/
+  authorNameInput.setAttribute('value', authorNameInput.value);
+  jobInput.setAttribute('value', jobInput.value);
   formElement.reset()
   /*Делаем кнопку неактивной*/
   const inputList = Array.from(formElement.querySelectorAll('.popup__item'));

@@ -24,9 +24,6 @@
 .popup__item:focus {
   outline: none;
 }
-.popup__item:invalid {
-
-}
 
 .popup__item::placeholder {
   color: #C4C4C4;
