@@ -78,12 +78,25 @@ function cardFormSubmitHandler(evt) {
   const picInput = cardForm.querySelector("#url-input");
   const cardName = placeNameInput.value;
   const cardLink = picInput.value;
-  cardForm.reset()
+  cardForm.reset();
   createCard(cardName, cardLink);
   /*Делаем кнопку неактивной*/
-  const inputList = Array.from(cardForm.querySelectorAll('.popup__item'));
-  const buttonElement = cardForm.querySelector('.popup__button');
-  toggleButtonState(inputList, buttonElement);
+
+ /*  const inputList = Array.from(cardForm.querySelectorAll(".popup__item"));
+  const buttonElement = cardForm.querySelector(".popup__button");
+  const inactiveButton = cardForm.querySelector(".popup__button_disabled");
+  toggleButtonState(inputList, buttonElement, {inactiveButton}); */
+
+  enableValidation({
+    formSelector: ".popup__form",
+    fieldsetSelector: ".popup__fieldset",
+    inputSelector: ".popup__item",
+    submitButtonSelector: ".popup__button",
+    inactiveButtonClass: "popup__button_disabled",
+    inputErrorClass: "popup__input_type_error",
+    errorClass: "popup__item-error_active",
+  });
+
   /*Закрываем попап*/
   togglePopup(cardPopup);
 }
