@@ -40,7 +40,7 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-const toggleButtonState = (
+export const toggleButtonState = (
   inputList,
   buttonElement,
   { inactiveButtonClass }

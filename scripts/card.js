@@ -1,10 +1,11 @@
-import { togglePopup, openImagePopup} from "./modal";
+import { togglePopup, openImagePopup} from "./modal.js";
 
 /*Функция создания карточек*/
 export function createCard(nameValue, imgValue) {
   const imagePopup = document.querySelector(".popup_type_image");
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  const cardContainer = document.querySelector(".cards");
   cardElement.querySelector(".card__image").setAttribute("src", imgValue);
   cardElement.querySelector(".card__title").textContent = nameValue;
   const altName = `Фотография местности: ${nameValue}`;
@@ -38,7 +39,9 @@ export function createCard(nameValue, imgValue) {
   /*Добавляем слушатель открытия попапа*/
   cardElement
     .querySelector(".card__image")
-    .addEventListener("click", togglePopup(imagePopup));
+    .addEventListener("click", function () {
+      togglePopup(imagePopup);
+    });
 
   /*Вставляем узел карточки в DOM*/
   cardContainer.append(cardElement);
@@ -47,6 +50,8 @@ export function createCard(nameValue, imgValue) {
 /*Функция добавления новой карточки*/
 export function cardFormSubmitHandler(evt) {
   evt.preventDefault();
+  const cardForm = document.querySelector(".popup_type_card .popup__form");
+  const cardPopup = document.querySelector(".popup_type_card");
   const placeNameInput = cardForm.querySelector("#placeName-input");
   const picInput = cardForm.querySelector("#url-input");
   const cardName = placeNameInput.value;

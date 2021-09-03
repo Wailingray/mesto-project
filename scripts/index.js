@@ -1,5 +1,6 @@
-import { createCard, cardFormSubmitHandler, disableButton } from "./card";
-import { togglePopup, openImagePopup } from "./modal";
+import { createCard, cardFormSubmitHandler, disableButton } from "./card.js";
+import { togglePopup, openImagePopup } from "./modal.js";
+import { enableValidation, toggleButtonState } from "./validate.js";
 
 
 //Массив карточек
@@ -37,11 +38,11 @@ const authorCloseButton = document.querySelector(".button_type_author");
 const placeCloseButton = document.querySelector(".button_type_place");
 const imageCloseButton = document.querySelector(".button_type_image");
 const authorPopup = document.querySelector(".popup_type_author");
+const imagePopup = document.querySelector(".popup_type_image");
+const cardForm = document.querySelector(".popup_type_card .popup__form");
 const cardPopup = document.querySelector(".popup_type_card");
 const popupList = document.querySelectorAll(".popup");
 const formElement = authorPopup.querySelector(".popup__form");
-const cardContainer = document.querySelector(".cards");
-const cardForm = document.querySelector(".popup_type_card .popup__form");
 const authorNameInput = formElement.elements.userName;
 const jobInput = formElement.elements.userJob;
 
@@ -78,11 +79,6 @@ function authorFormSubmitHandler(evt) {
   /*Обновляем value полей ввода*/
   authorNameInput.setAttribute('value', authorNameInput.value);
   jobInput.setAttribute('value', jobInput.value);
-  formElement.reset()
-  /*Делаем кнопку неактивной*/
-  const inputList = Array.from(formElement.querySelectorAll('.popup__item'));
-  const buttonElement = formElement.querySelector('.popup__button');
-  toggleButtonState(inputList, buttonElement);
   /*Закрываем попап*/
   togglePopup(authorPopup);
 }
