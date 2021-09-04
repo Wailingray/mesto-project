@@ -1,9 +1,17 @@
-import { togglePopup } from "./modal.js";
-import { toggleButtonState } from './utils.js';
+import {
+  openPopup,
+  closePopup,
+  addClosePopupOnEscListener,
+  removeClosePopupOnEscListener,
+} from "./modal.js";
+import { toggleButtonState } from "./utils.js";
+
+export const imagePopup = document.querySelector(".popup_type_image");
+export const cardForm = document.querySelector(".popup_type_card .popup__form");
+export const cardPopup = document.querySelector(".popup_type_card");
 
 /*Функция создания карточек*/
 export function createCard(nameValue, imgValue) {
-  const imagePopup = document.querySelector(".popup_type_image");
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardContainer = document.querySelector(".cards");
@@ -41,7 +49,8 @@ export function createCard(nameValue, imgValue) {
   cardElement
     .querySelector(".card__image")
     .addEventListener("click", function () {
-      togglePopup(imagePopup);
+      openPopup(imagePopup);
+      addClosePopupOnEscListener();
     });
 
   /*Вставляем узел карточки в DOM*/
@@ -51,8 +60,6 @@ export function createCard(nameValue, imgValue) {
 /*Функция добавления новой карточки*/
 export function cardFormSubmitHandler(evt) {
   evt.preventDefault();
-  const cardForm = document.querySelector(".popup_type_card .popup__form");
-  const cardPopup = document.querySelector(".popup_type_card");
   const cardInputs = Array.from(cardForm.querySelectorAll(".popup__item"));
   const cardButton = cardForm.querySelector(".popup__button");
   const placeNameInput = cardForm.querySelector("#placeName-input");
@@ -68,13 +75,6 @@ export function cardFormSubmitHandler(evt) {
   });
 
   /*Закрываем попап*/
-  togglePopup(cardPopup);
+  closePopup(cardPopup);
+  removeClosePopupOnEscListener();
 }
-
-
-/*Функция деактивации кнопки попапа карточек*/
-export const disableButton = (FormSelector, { buttonSelector, inactiveButtonClass }) => {
-  const buttonElement = FormSelector.querySelector(buttonSelector);
-  buttonElement.classList.add(inactiveButtonClass);
-  buttonElement.setAttribute("disabled", "disabled");
-};

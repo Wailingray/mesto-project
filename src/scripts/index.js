@@ -1,8 +1,18 @@
-import './../pages/index.css';
-import { createCard, cardFormSubmitHandler, disableButton } from "./card.js";
-import { togglePopup } from "./modal.js";
+import "./../pages/index.css";
+import {
+  createCard,
+  cardFormSubmitHandler,
+  imagePopup,
+  cardForm,
+  cardPopup,
+} from "./card.js";
+import {
+  openPopup,
+  closePopup,
+  addClosePopupOnEscListener,
+  removeClosePopupOnEscListener,
+} from "./modal.js";
 import { enableValidation } from "./validate.js";
-
 
 //Массив карточек
 const initialCards = [
@@ -39,33 +49,35 @@ const authorCloseButton = document.querySelector(".button_type_author");
 const placeCloseButton = document.querySelector(".button_type_place");
 const imageCloseButton = document.querySelector(".button_type_image");
 const authorPopup = document.querySelector(".popup_type_author");
-const imagePopup = document.querySelector(".popup_type_image");
-const cardForm = document.querySelector(".popup_type_card .popup__form");
-const cardPopup = document.querySelector(".popup_type_card");
-const popupList = document.querySelectorAll(".popup");
-const formElement = authorPopup.querySelector(".popup__form");
-const authorNameInput = formElement.elements.userName;
-const jobInput = formElement.elements.userJob;
+const authorFormElement = authorPopup.querySelector(".popup__form");
+const authorNameInput = authorFormElement.elements.userName;
+const jobInput = authorFormElement.elements.userJob;
+const popupList = Array.from(document.querySelectorAll(".popup"));
 
 /*Вешаем обработчики на кнопки попапов*/
 imageCloseButton.addEventListener("click", function () {
-  togglePopup(imagePopup);
+  closePopup(imagePopup);
+  removeClosePopupOnEscListener();
 });
 
 editButton.addEventListener("click", function () {
-  togglePopup(authorPopup);
+  openPopup(authorPopup);
+  addClosePopupOnEscListener();
 });
 
 authorCloseButton.addEventListener("click", function () {
-  togglePopup(authorPopup);
+  closePopup(authorPopup);
+  removeClosePopupOnEscListener();
 });
 
 addButton.addEventListener("click", function () {
-  togglePopup(cardPopup);
+  openPopup(cardPopup);
+  addClosePopupOnEscListener();
 });
 
 placeCloseButton.addEventListener("click", function () {
-  togglePopup(cardPopup);
+  closePopup(cardPopup);
+  removeClosePopupOnEscListener();
 });
 
 // Обработчик «отправки» формы
@@ -78,27 +90,14 @@ function authorFormSubmitHandler(evt) {
   profileName.textContent = authorNameInput.value;
   jobName.textContent = jobInput.value;
   /*Обновляем value полей ввода*/
-  authorNameInput.setAttribute('value', authorNameInput.value);
-  jobInput.setAttribute('value', jobInput.value);
+  authorNameInput.setAttribute("value", authorNameInput.value);
+  jobInput.setAttribute("value", jobInput.value);
   /*Закрываем попап*/
-  togglePopup(authorPopup);
+  closePopup(authorPopup);
+  removeClosePopupOnEscListener();
 }
 
-formElement.addEventListener("submit", authorFormSubmitHandler);
-
-/*Слушатели закрытия попапа на оверлее*/
-popupList.forEach(element => element.addEventListener("mousedown", evt => {
-  if (evt.target.classList.contains("popup_opened")) {
-    evt.target.classList.remove("popup_opened");
-  }
-}));
-
-/*Слушатель закрытия попапа при нажатии esc */
-document.addEventListener("keydown", function(evt) {
-  if(evt.key === "Escape") {
-    document.querySelector(".popup_opened").classList.remove("popup_opened");
-  }
-});
+authorFormElement.addEventListener("submit", authorFormSubmitHandler);
 
 /*Обработчик формы*/
 cardForm.addEventListener("submit", cardFormSubmitHandler);
@@ -108,6 +107,15 @@ initialCards.forEach(function (item) {
   createCard(item.name, item.link);
 });
 
+/*Слушатели закрытия попапа на оверлее*/
+popupList.forEach((element) =>
+  element.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("popup_opened")) {
+      evt.target.classList.remove("popup_opened");
+      removeClosePopupOnEscListener();
+    }
+  })
+);
 
 enableValidation({
   formSelector: ".popup__form",
