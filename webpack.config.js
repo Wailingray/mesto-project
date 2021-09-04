@@ -1,4 +1,6 @@
-const path = require('path'); // подключаем path к конфигу вебпак
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: { main: './src/index.js' },
@@ -7,13 +9,26 @@ module.exports = {
     filename: 'main.js',
         publicPath: ''
   },
-  mode: 'development',
+    mode: 'development',
   devServer: {
-    static: path.resolve(__dirname, './dist'), // путь, куда "смотрит" режим разработчика
-    compress: true, // это ускорит загрузку в режиме разработки
-    port: 8080, // порт, чтобы открывать сайт по адресу localhost:8080, но можно поменять порт
-
-    open: true // сайт будет открываться сам при запуске npm run dev
+    contentBase: path.resolve(__dirname, './dist'),
+    compress: true,
+    port: 8080,
+    open: true
   },
-}
-
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: 'babel-loader',
+        exclude: /node_modules/
+      }
+    ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html'
+    }),
+        new CleanWebpackPlugin(),
+  ]
+};
