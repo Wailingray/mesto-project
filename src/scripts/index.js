@@ -100,7 +100,6 @@ document.addEventListener("keydown", function(evt) {
   }
 });
 
-
 /*Обработчик формы*/
 cardForm.addEventListener("submit", cardFormSubmitHandler);
 

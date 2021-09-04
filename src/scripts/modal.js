@@ -2,5 +2,3 @@
 export function togglePopup(popupElement) {
   popupElement.classList.toggle("popup_opened");
 }
-
-/*Функция открытия попапа изображения*/

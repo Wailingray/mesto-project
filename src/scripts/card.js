@@ -1,5 +1,5 @@
 import { togglePopup } from "./modal.js";
-import { toggleButtonState } from './validate.js';
+import { toggleButtonState } from './utils.js';
 
 /*Функция создания карточек*/
 export function createCard(nameValue, imgValue) {
