@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; /*позволит верно позиционировать ссылки на другие языки страницы в будущем*/
+  align-items: flex-start;
+  min-height: 74px;
+  max-width: 880px;
+  border-bottom: solid rgba(84, 84, 84, 0.7) 1px;
+  padding-top: 45px;
+}
+
+@media screen and (max-width: 800px) {
+  .header {
+    padding-top: 28px;
+    padding-left: 27px;
+    min-height: 56px;
+  }
+}

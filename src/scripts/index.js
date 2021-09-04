@@ -1,3 +1,4 @@
+import './../pages/index.css';
 import { createCard, cardFormSubmitHandler, disableButton } from "./card.js";
 import { togglePopup, openImagePopup } from "./modal.js";
 import { enableValidation, toggleButtonState } from "./validate.js";

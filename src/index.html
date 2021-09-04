@@ -9,12 +9,11 @@
     <meta name="author" content="Иван Сергеев" />
     <title>Проект Mesto</title>
     <link type="image/png" sizes="16x16" rel="icon" href="images/logo.svg" />
-    <link rel="stylesheet" href="pages/index.css" />
   </head>
   <body class="page">
     <header class="header page__section">
       <img
-        src="images/logo.svg"
+        src="<%=require('./images/logo.svg')%>"
         alt="Логотип Mesto russia"
         class="header__logo"
       />
@@ -22,7 +21,7 @@
     <main>
       <section class="profile page__section">
         <img
-          src="images/avatar.jpg"
+          src="<%=require('./images/avatar.jpg')%>"
           alt="Ваша фотография (по умолчанию тут фото Жака Кусто)"
           class="profile__avatar"
         />
