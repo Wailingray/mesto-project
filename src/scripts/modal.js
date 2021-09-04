@@ -4,7 +4,3 @@ export function togglePopup(popupElement) {
 }
 
 /*Функция открытия попапа изображения*/
-
-export function openImagePopup() {
-  togglePopup(imagePopup);
-}

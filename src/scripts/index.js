@@ -1,7 +1,7 @@
 import './../pages/index.css';
 import { createCard, cardFormSubmitHandler, disableButton } from "./card.js";
-import { togglePopup, openImagePopup } from "./modal.js";
-import { enableValidation, toggleButtonState } from "./validate.js";
+import { togglePopup } from "./modal.js";
+import { enableValidation } from "./validate.js";
 
 
 //Массив карточек

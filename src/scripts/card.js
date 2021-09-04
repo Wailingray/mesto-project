@@ -1,4 +1,5 @@
-import { togglePopup, openImagePopup} from "./modal.js";
+import { togglePopup } from "./modal.js";
+import { toggleButtonState } from './validate.js';
 
 /*Функция создания карточек*/
 export function createCard(nameValue, imgValue) {
@@ -52,6 +53,8 @@ export function cardFormSubmitHandler(evt) {
   evt.preventDefault();
   const cardForm = document.querySelector(".popup_type_card .popup__form");
   const cardPopup = document.querySelector(".popup_type_card");
+  const cardInputs = Array.from(cardForm.querySelectorAll(".popup__item"));
+  const cardButton = cardForm.querySelector(".popup__button");
   const placeNameInput = cardForm.querySelector("#placeName-input");
   const picInput = cardForm.querySelector("#url-input");
   const cardName = placeNameInput.value;
@@ -60,8 +63,7 @@ export function cardFormSubmitHandler(evt) {
   createCard(cardName, cardLink);
   /*Делаем кнопку неактивной*/
 
-  disableButton(cardForm, {
-    buttonSelector: ".popup__button",
+  toggleButtonState(cardInputs, cardButton, {
     inactiveButtonClass: "popup__button_disabled",
   });
 
