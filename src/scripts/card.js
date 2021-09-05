@@ -6,19 +6,21 @@ import {
 } from "./modal.js";
 import { toggleButtonState } from "./utils.js";
 
-export const imagePopup = document.querySelector(".popup_type_image");
-export const cardForm = document.querySelector(".popup_type_card .popup__form");
-export const cardPopup = document.querySelector(".popup_type_card");
+const imagePopup = document.querySelector(".popup_type_image");
+const popupImage = imagePopup.querySelector(".popup__image");
+const cardForm = document.querySelector(".popup_type_card .popup__form");
+const cardPopup = document.querySelector(".popup_type_card");
 
 /*Функция создания карточек*/
-export function createCard(nameValue, imgValue) {
+function createCard(nameValue, imgValue) {
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardContainer = document.querySelector(".cards");
-  cardElement.querySelector(".card__image").setAttribute("src", imgValue);
+  const cardImage = cardElement.querySelector(".card__image");
+  cardImage.setAttribute("src", imgValue);
   cardElement.querySelector(".card__title").textContent = nameValue;
   const altName = `Фотография местности: ${nameValue}`;
-  cardElement.querySelector(".card__image").setAttribute("alt", altName);
+  cardImage.setAttribute("alt", altName);
 
   /*Добавляем слушатель удаления карточки*/
   cardElement
@@ -37,28 +39,24 @@ export function createCard(nameValue, imgValue) {
     });
 
   /*Добавляем слушатель копирования содержания карточки в попап*/
-  cardElement
-    .querySelector(".card__image")
-    .addEventListener("click", function () {
-      imagePopup.querySelector(".popup__image").setAttribute("src", imgValue);
-      imagePopup.querySelector(".popup__image").setAttribute("alt", altName);
-      imagePopup.querySelector(".popup__figcaption").textContent = nameValue;
-    });
+  cardImage.addEventListener("click", function () {
+    popupImage.setAttribute("src", imgValue);
+    popupImage.setAttribute("alt", altName);
+    imagePopup.querySelector(".popup__figcaption").textContent = nameValue;
+  });
 
   /*Добавляем слушатель открытия попапа*/
-  cardElement
-    .querySelector(".card__image")
-    .addEventListener("click", function () {
-      openPopup(imagePopup);
-      addClosePopupOnEscListener();
-    });
+  cardImage.addEventListener("click", function () {
+    openPopup(imagePopup);
+    addClosePopupOnEscListener();
+  });
 
   /*Вставляем узел карточки в DOM*/
   cardContainer.append(cardElement);
 }
 
 /*Функция добавления новой карточки*/
-export function cardFormSubmitHandler(evt) {
+function cardFormSubmitHandler(evt) {
   evt.preventDefault();
   const cardInputs = Array.from(cardForm.querySelectorAll(".popup__item"));
   const cardButton = cardForm.querySelector(".popup__button");
@@ -78,3 +76,5 @@ export function cardFormSubmitHandler(evt) {
   closePopup(cardPopup);
   removeClosePopupOnEscListener();
 }
+
+export { imagePopup, cardForm, cardPopup, createCard, cardFormSubmitHandler };
