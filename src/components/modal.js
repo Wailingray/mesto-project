@@ -19,7 +19,7 @@ export function closePopup(popupElement) {
 
 function closePopupOnEsc(evt) {
   if (evt.key === "Escape") {
-    document.querySelector(".popup_opened").classList.remove("popup_opened");
+    closePopup(document.querySelector(".popup_opened"));
     removeClosePopupOnEscListener();
   }
 }
@@ -41,7 +41,7 @@ imageCloseButton.addEventListener("click", function () {
 popupList.forEach((element) =>
   element.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("popup_opened")) {
-      evt.target.classList.remove("popup_opened");
+      closePopup(evt.target);
       removeClosePopupOnEscListener();
     }
   })
