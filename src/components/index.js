@@ -1,6 +1,6 @@
 import "./../pages/index.css";
 import {
-  createCard,
+  renderCard,
   cardFormSubmitHandler,
   cardForm,
   cardPopup,
@@ -43,7 +43,7 @@ cardForm.addEventListener("submit", cardFormSubmitHandler);
 
 /*Добавляем начальные 6 карточек*/
 initialCards.forEach(function (item) {
-  createCard(item.name, item.link);
+  renderCard(item.name, item.link);
 });
 
 enableValidation({
