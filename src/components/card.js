@@ -2,7 +2,7 @@ import {
   openPopup,
   closePopup,
 } from "./modal.js";
-import { toggleButtonState } from "./validate.js";
+import { toggleButtonState } from "./utils.js";
 
 const imagePopup = document.querySelector(".popup_type_image");
 const popupImage = imagePopup.querySelector(".popup__image");
