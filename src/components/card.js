@@ -1,15 +1,17 @@
 import {
   openPopup,
   closePopup,
-  addClosePopupOnEscListener,
-  removeClosePopupOnEscListener,
 } from "./modal.js";
-import { toggleButtonState } from "./utils.js";
+import { toggleButtonState } from "./validate.js";
 
 const imagePopup = document.querySelector(".popup_type_image");
 const popupImage = imagePopup.querySelector(".popup__image");
 const cardForm = document.querySelector(".popup_type_card .popup__form");
 const cardPopup = document.querySelector(".popup_type_card");
+
+function RemoveCard (evt) {
+
+}
 
 /*Функция создания карточек*/
 function createCard(nameValue, imgValue) {
@@ -48,7 +50,6 @@ function createCard(nameValue, imgValue) {
   /*Добавляем слушатель открытия попапа*/
   cardImage.addEventListener("click", function () {
     openPopup(imagePopup);
-    addClosePopupOnEscListener();
   });
 
   /*Вставляем узел карточки в DOM*/
@@ -74,7 +75,6 @@ function cardFormSubmitHandler(evt) {
 
   /*Закрываем попап*/
   closePopup(cardPopup);
-  removeClosePopupOnEscListener();
 }
 
 export { imagePopup, cardForm, cardPopup, createCard, cardFormSubmitHandler };
