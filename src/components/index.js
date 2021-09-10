@@ -7,7 +7,6 @@ import {
 } from "./card.js";
 import { openPopup, closePopup, authorPopup } from "./modal.js";
 import { enableValidation } from "./validate.js";
-import { initialCards } from "./initialCards";
 import { getUserData, getUserCards } from "./api";
 const profilePic = document.querySelector(".profile__avatar");
 const profileName = document.querySelector(".profile__name");
@@ -59,7 +58,7 @@ const renderUserCards = () => {
   getUserCards()
     .then((cards) => {
       cards.forEach(function (item) {
-        renderCard(item.name, item.link);
+        renderCard(item.name, item.link, item._id);
       });
     })
     .catch((err) => {

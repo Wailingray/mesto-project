@@ -1,35 +1,33 @@
-import {
-  openPopup,
-  closePopup,
-} from "./modal.js";
+import { openPopup, closePopup } from "./modal.js";
 import { toggleButtonState } from "./utils.js";
-import { addCard } from "./api.js";
+import { addCard, deleteCard } from "./api.js";
 const imagePopup = document.querySelector(".popup_type_image");
 const popupImage = imagePopup.querySelector(".popup__image");
 const cardForm = document.querySelector(".popup_type_card .popup__form");
 const cardPopup = document.querySelector(".popup_type_card");
 
-function removeCard (evt) {
+function removeCard(evt) {
   const eventTarget = evt.target;
   eventTarget.closest(".card").remove();
 }
 
-function toggleLike (evt) {
+function toggleLike(evt) {
   const eventTarget = evt.target;
   eventTarget.classList.toggle("card__like-button_active");
 }
 
 /*Функция добавления карточки в DOM*/
-function renderCard (nameValue, imgValue) {
+function renderCard(nameValue, imgValue, idValue) {
   const cardContainer = document.querySelector(".cards");
-  cardContainer.prepend(createCard(nameValue, imgValue));
+  cardContainer.prepend(createCard(nameValue, imgValue, idValue));
 }
 
 /*Функция создания карточек*/
-function createCard(nameValue, imgValue) {
+function createCard(nameValue, imgValue, idValue) {
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
+  cardElement.setAttribute("id", idValue);
   cardImage.setAttribute("src", imgValue);
   cardElement.querySelector(".card__title").textContent = nameValue;
   const altName = `Фотография местности: ${nameValue}`;
@@ -38,7 +36,16 @@ function createCard(nameValue, imgValue) {
   /*Добавляем слушатель удаления карточки*/
   cardElement
     .querySelector(".card__delete-button")
-    .addEventListener("click", removeCard);
+    .addEventListener("click", (evt) => {
+      const currentCardId = evt.target.closest(".card").getAttribute("id");
+      deleteCard(currentCardId)
+        .then(() => {
+          removeCard(evt);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
 
   /*Добавляем слушатель лайка*/
   cardElement

@@ -36,11 +36,11 @@ export const addCard = (cardName, cardLink) => {
   }).then(getResponse)
 }
 
-export const deleteTask = (taskId) => {
-  return fetch(`${todoistApiConfig.baseUrl}/tasks/${taskId}`, {
+export const deleteCard = (cardId) => {
+  return fetch(`${apiConfig.baseUrl}/cards/${cardId}`, {
     method: 'DELETE',
-    headers: todoistApiConfig.headers,
+    headers: apiConfig.headers,
   }).then((res) => {
-    if (!res.ok) return Promise.reject(`ошибка ${res.status}`);
+    if (!res.ok) return Promise.reject(`Ошибка: ${res.status}`);
   })
 }
