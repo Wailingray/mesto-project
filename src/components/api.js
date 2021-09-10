@@ -1,7 +1,8 @@
 const apiConfig = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-1',
   headers: {
-    'authorization': '0ce1a348-f8e4-4fce-80c6-e6b193b8791b'
+    'authorization': '0ce1a348-f8e4-4fce-80c6-e6b193b8791b',
+    'Content-Type': 'application/json'
   }
 }
 
@@ -22,4 +23,24 @@ export const getUserCards = () => {
   return fetch(`${apiConfig.baseUrl}/cards`, {
     headers: apiConfig.headers
   }).then(getResponse)
+}
+
+export const addCard = (cardName, cardLink) => {
+  return fetch(`${apiConfig.baseUrl}/cards`, {
+    method: 'POST',
+    headers: apiConfig.headers,
+    body: JSON.stringify({
+      name: cardName,
+      link: cardLink
+    })
+  }).then(getResponse)
+}
+
+export const deleteTask = (taskId) => {
+  return fetch(`${todoistApiConfig.baseUrl}/tasks/${taskId}`, {
+    method: 'DELETE',
+    headers: todoistApiConfig.headers,
+  }).then((res) => {
+    if (!res.ok) return Promise.reject(`ошибка ${res.status}`);
+  })
 }

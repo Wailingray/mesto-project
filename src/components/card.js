@@ -3,7 +3,7 @@ import {
   closePopup,
 } from "./modal.js";
 import { toggleButtonState } from "./utils.js";
-
+import { addCard } from "./api.js";
 const imagePopup = document.querySelector(".popup_type_image");
 const popupImage = imagePopup.querySelector(".popup__image");
 const cardForm = document.querySelector(".popup_type_card .popup__form");
@@ -66,7 +66,13 @@ function cardFormSubmitHandler(evt) {
   const cardName = placeNameInput.value;
   const cardLink = picInput.value;
   cardForm.reset();
-  renderCard(cardName, cardLink);
+  addCard(cardName, cardLink)
+    .then((cardObj) => {
+      renderCard(cardObj.name, cardObj.link);
+    })
+    .catch((err) => {
+      console.log(err); // выводим ошибку в консоль
+    });
   /*Делаем кнопку неактивной*/
 
   toggleButtonState(cardInputs, cardButton, {

@@ -62,7 +62,14 @@ const renderUserCards = () => {
         renderCard(item.name, item.link);
       });
     })
+    .catch((err) => {
+      console.log(err);
+    });
 };
+
+
+renderUserData();
+renderUserCards();
 
 enableValidation({
   formSelector: ".popup__form",
@@ -73,6 +80,3 @@ enableValidation({
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__item-error_active",
 });
-
-renderUserData();
-renderUserCards();
