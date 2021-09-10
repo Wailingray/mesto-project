@@ -42,16 +42,14 @@ authorFormElement.addEventListener("submit", authorFormSubmitHandler);
 /*Обработчик формы*/
 cardForm.addEventListener("submit", cardFormSubmitHandler);
 
-
 /*Отрисовка аватара*/
 const renderUserData = () => {
-  getUserData()
-    .then((data) => {
-      profilePic.setAttribute('src', data.avatar);
-      profileName.textContent = data.name;
-      profileName.setAttribute('id', data._id);
-      jobName.textContent = data.about;
-    })
+  getUserData().then((data) => {
+    profilePic.setAttribute("src", data.avatar);
+    profileName.textContent = data.name;
+    profileName.setAttribute("id", data._id);
+    jobName.textContent = data.about;
+  });
 };
 
 /*Добавляем начальные карточки*/
@@ -59,14 +57,19 @@ const renderUserCards = () => {
   getUserCards()
     .then((cards) => {
       cards.forEach(function (item) {
-        renderCard(item.name, item.link, item._id, item.owner._id, profileName.id);
+        renderCard(
+          item.name,
+          item.link,
+          item._id,
+          item.owner._id,
+          profileName.id
+        );
       });
     })
     .catch((err) => {
       console.log(err);
     });
 };
-
 
 renderUserData();
 renderUserCards();

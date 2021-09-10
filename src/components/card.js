@@ -29,13 +29,14 @@ function renderCard(nameValue, imgValue, idValue, owner_idValue, user_idValue) {
 }
 
 /*Функция проверки на возможность удаления карточки*/
-export function checkDeleteAbility(userId, cardId) {
-  return userId === cardId;
+export function checkDeleteAbility(userId, cardOwnerId) {
+  return userId === cardOwnerId;
 }
 
 /*Функция удаления кнопки из разметки карточки*/
 export function deleteCardButton(cardElement) {
-  return cardElement.removeChild(cardElement.firstChild);
+  cardElement.querySelector(".card__delete-button").remove();
+  return cardElement;
 }
 
 /*Функция создания карточек*/
