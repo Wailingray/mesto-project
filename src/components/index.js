@@ -8,6 +8,8 @@ import {
 import { openPopup, closePopup, authorPopup } from "./modal.js";
 import { enableValidation } from "./validate.js";
 import { initialCards } from "./initialCards";
+import { getUserData } from "./api";
+const profilePic = document.querySelector(".profile__avatar");
 const profileName = document.querySelector(".profile__name");
 const jobName = document.querySelector(".profile__description");
 const editButton = document.querySelector(".button_type_edit");
@@ -41,6 +43,17 @@ authorFormElement.addEventListener("submit", authorFormSubmitHandler);
 /*Обработчик формы*/
 cardForm.addEventListener("submit", cardFormSubmitHandler);
 
+
+/*Отрисовка аватара*/
+const renderUserData = () => {
+  getUserData()
+    .then((data) => {
+      profilePic.setAttribute('src', data.avatar);
+      profileName.textContent = data.name;
+      jobName.textContent = data.about;
+    })
+};
+
 /*Добавляем начальные 6 карточек*/
 initialCards.forEach(function (item) {
   renderCard(item.name, item.link);
@@ -55,3 +68,5 @@ enableValidation({
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__item-error_active",
 });
+
+renderUserData();
