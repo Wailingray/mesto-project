@@ -17,3 +17,9 @@ export const getUserData = () => {
     headers: apiConfig.headers
   }).then(getResponse)
 }
+
+export const getUserCards = () => {
+  return fetch(`${apiConfig.baseUrl}/cards`, {
+    headers: apiConfig.headers
+  }).then(getResponse)
+}

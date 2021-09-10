@@ -8,7 +8,7 @@ import {
 import { openPopup, closePopup, authorPopup } from "./modal.js";
 import { enableValidation } from "./validate.js";
 import { initialCards } from "./initialCards";
-import { getUserData } from "./api";
+import { getUserData, getUserCards } from "./api";
 const profilePic = document.querySelector(".profile__avatar");
 const profileName = document.querySelector(".profile__name");
 const jobName = document.querySelector(".profile__description");
@@ -54,10 +54,15 @@ const renderUserData = () => {
     })
 };
 
-/*Добавляем начальные 6 карточек*/
-initialCards.forEach(function (item) {
-  renderCard(item.name, item.link);
-});
+/*Добавляем начальные карточки*/
+const renderUserCards = () => {
+  getUserCards()
+    .then((cards) => {
+      cards.forEach(function (item) {
+        renderCard(item.name, item.link);
+      });
+    })
+};
 
 enableValidation({
   formSelector: ".popup__form",
@@ -70,3 +75,4 @@ enableValidation({
 });
 
 renderUserData();
+renderUserCards();
