@@ -17,9 +17,25 @@ function toggleLike(evt) {
 }
 
 /*Функция добавления карточки в DOM*/
-function renderCard(nameValue, imgValue, idValue) {
+function renderCard(nameValue, imgValue, idValue, owner_idValue, user_idValue) {
   const cardContainer = document.querySelector(".cards");
-  cardContainer.prepend(createCard(nameValue, imgValue, idValue));
+  if (!checkDeleteAbility(user_idValue, owner_idValue)) {
+    cardContainer.append(
+      deleteCardButton(createCard(nameValue, imgValue, idValue))
+    )
+  } else {
+    cardContainer.append(createCard(nameValue, imgValue, idValue));
+  }
+}
+
+/*Функция проверки на возможность удаления карточки*/
+export function checkDeleteAbility(userId, cardId) {
+  return userId === cardId;
+}
+
+/*Функция удаления кнопки из разметки карточки*/
+export function deleteCardButton(cardElement) {
+  return cardElement.removeChild(cardElement.firstChild);
 }
 
 /*Функция создания карточек*/

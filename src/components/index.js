@@ -49,6 +49,7 @@ const renderUserData = () => {
     .then((data) => {
       profilePic.setAttribute('src', data.avatar);
       profileName.textContent = data.name;
+      profileName.setAttribute('id', data._id);
       jobName.textContent = data.about;
     })
 };
@@ -58,7 +59,7 @@ const renderUserCards = () => {
   getUserCards()
     .then((cards) => {
       cards.forEach(function (item) {
-        renderCard(item.name, item.link, item._id);
+        renderCard(item.name, item.link, item._id, item.owner._id, profileName.id);
       });
     })
     .catch((err) => {
