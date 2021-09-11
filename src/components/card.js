@@ -1,6 +1,7 @@
 import { openPopup, closePopup } from "./modal.js";
 import { toggleButtonState } from "./utils.js";
 import { addCard, deleteCard } from "./api.js";
+import { renderUserCards, renderUserData } from "./index.js";
 const imagePopup = document.querySelector(".popup_type_image");
 const popupImage = imagePopup.querySelector(".popup__image");
 const cardForm = document.querySelector(".popup_type_card .popup__form");
@@ -17,14 +18,14 @@ function toggleLike(evt) {
 }
 
 /*Функция добавления карточки в DOM*/
-function renderCard(nameValue, imgValue, idValue, owner_idValue, user_idValue) {
+function renderCard(nameValue, imgValue, idValue, owner_idValue, user_idValue, numOfLikes) {
   const cardContainer = document.querySelector(".cards");
   if (!checkDeleteAbility(user_idValue, owner_idValue)) {
     cardContainer.append(
-      deleteCardButton(createCard(nameValue, imgValue, idValue))
+      deleteCardButton(createCard(nameValue, imgValue, idValue, numOfLikes))
     )
   } else {
-    cardContainer.append(createCard(nameValue, imgValue, idValue));
+    cardContainer.append(createCard(nameValue, imgValue, idValue, numOfLikes));
   }
 }
 
@@ -40,13 +41,15 @@ export function deleteCardButton(cardElement) {
 }
 
 /*Функция создания карточек*/
-function createCard(nameValue, imgValue, idValue) {
+function createCard(nameValue, imgValue, idValue, numOfLikes) {
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
+  const likesCount = cardElement.querySelector(".card__like-counter");
   cardElement.setAttribute("id", idValue);
   cardImage.setAttribute("src", imgValue);
   cardElement.querySelector(".card__title").textContent = nameValue;
+  likesCount.textContent = numOfLikes;
   const altName = `Фотография местности: ${nameValue}`;
   cardImage.setAttribute("alt", altName);
 
@@ -102,7 +105,6 @@ function cardFormSubmitHandler(evt) {
   toggleButtonState(cardInputs, cardButton, {
     inactiveButtonClass: "popup__button_disabled",
   });
-
   /*Закрываем попап*/
   closePopup(cardPopup);
 }

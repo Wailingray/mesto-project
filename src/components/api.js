@@ -1,3 +1,5 @@
+import { renderUserCards, renderUserData } from "./index.js";
+
 export const apiConfig = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-1',
   headers: {

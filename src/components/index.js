@@ -51,7 +51,7 @@ authorFormElement.addEventListener("submit", authorFormSubmitHandler);
 cardForm.addEventListener("submit", cardFormSubmitHandler);
 
 /*Отрисовка аватара*/
-const renderUserData = () => {
+export const renderUserData = () => {
   getUserData().then((data) => {
     profilePic.setAttribute("src", data.avatar);
     profileName.textContent = data.name;
@@ -67,7 +67,7 @@ const renderUserData = () => {
  */
 
 /*Добавляем начальные карточки*/
-const renderUserCards = () => {
+export const renderUserCards = () => {
   getUserCards()
     .then((cards) => {
       cards.forEach(function (item) {
@@ -76,7 +76,8 @@ const renderUserCards = () => {
           item.link,
           item._id,
           item.owner._id,
-          profileName.id
+          profileName.id,
+          item.likes.length
         );
       });
     })
@@ -85,9 +86,8 @@ const renderUserCards = () => {
     });
 };
 
-Promise.all(renderUserCards(), renderUserData());
-
-
+renderUserCards();
+renderUserData();
 
 enableValidation({
   formSelector: ".popup__form",
