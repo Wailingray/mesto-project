@@ -1,6 +1,6 @@
 import { openPopup, closePopup } from "./modal.js";
 import { toggleButtonState } from "./utils.js";
-import { addCard, deleteCard } from "./api.js";
+import { addCard, deleteCard, putLike, removeLike } from "./api.js";
 import { profileName, renderUserData } from "./index.js";
 const imagePopup = document.querySelector(".popup_type_image");
 const popupImage = imagePopup.querySelector(".popup__image");
@@ -12,9 +12,30 @@ function removeCard(evt) {
   eventTarget.closest(".card").remove();
 }
 
-function toggleLike(evt) {
+function addLike(evt) {
   const eventTarget = evt.target;
-  eventTarget.classList.toggle("card__like-button_active");
+  const thisCard = eventTarget.closest(".card");
+  const targetCardId = thisCard.getAttribute("id");
+  putLike(targetCardId).then((data) => {
+    eventTarget.classList.add("card__like-button_active");
+    thisCard.querySelector(".card__like-counter").textContent =
+      data.likes.length;
+  });
+}
+
+function deleteLike(evt) {
+  const eventTarget = evt.target;
+  const thisCard = eventTarget.closest(".card");
+  const targetCardId = thisCard.getAttribute("id");
+  removeLike(targetCardId).then((data) => {
+    eventTarget.classList.remove("card__like-button_active");
+    thisCard.querySelector(".card__like-counter").textContent =
+      data.likes.length;
+  });
+}
+
+function toggleLike() {
+
 }
 
 /*Функция добавления карточки в DOM*/
@@ -75,10 +96,10 @@ export function createCard(
       .classList.add("card__delete-button_hidden");
   }
 
-  /*Добавляем слушатель лайка*/
+  /*Добавляем слушатели лайка*/
   cardElement
     .querySelector(".card__like-button")
-    .addEventListener("click", toggleLike);
+    .addEventListener("click", addLike);
 
   /*Добавляем слушатель настройки попапа*/
   cardImage.addEventListener("click", function () {

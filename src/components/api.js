@@ -1,3 +1,4 @@
+import { cardForm } from "./card.js";
 import { renderUserCards, renderUserData } from "./index.js";
 
 export const apiConfig = {
@@ -47,6 +48,19 @@ export const deleteCard = (cardId) => {
   })
 }
 
+export const putLike = (cardId) => {
+  return fetch(`${apiConfig.baseUrl}/cards/likes/${cardId}`, {
+    method: 'PUT',
+    headers: apiConfig.headers,
+  }).then(getResponse)
+}
+
+export const removeLike = (cardId) => {
+  return fetch(`${apiConfig.baseUrl}/cards/likes/${cardId}`, {
+    method: 'DELETE',
+    headers: apiConfig.headers,
+  }).then(getResponse)
+}
 
 export const patchUserInfo = (userName, userJob) => {
   return fetch(`${apiConfig.baseUrl}/users/me`, {
