@@ -1,7 +1,7 @@
 import { openPopup, closePopup } from "./modal.js";
 import { toggleButtonState } from "./utils.js";
 import { addCard, deleteCard } from "./api.js";
-import { renderUserCards, renderUserData } from "./index.js";
+import { profileName, renderUserData } from "./index.js";
 const imagePopup = document.querySelector(".popup_type_image");
 const popupImage = imagePopup.querySelector(".popup__image");
 const cardForm = document.querySelector(".popup_type_card .popup__form");
@@ -18,19 +18,13 @@ function toggleLike(evt) {
 }
 
 /*Функция добавления карточки в DOM*/
-function renderCard(nameValue, imgValue, idValue, owner_idValue, user_idValue, numOfLikes) {
+function renderCard(cardElement) {
   const cardContainer = document.querySelector(".cards");
-  if (!checkDeleteAbility(user_idValue, owner_idValue)) {
-    cardContainer.append(
-      deleteCardButton(createCard(nameValue, imgValue, idValue, numOfLikes))
-    )
-  } else {
-    cardContainer.append(createCard(nameValue, imgValue, idValue, numOfLikes));
-  }
+  cardContainer.append(cardElement);
 }
 
 /*Функция проверки на возможность удаления карточки*/
-export function checkDeleteAbility(userId, cardOwnerId) {
+function checkDeleteAbility(userId, cardOwnerId) {
   return userId === cardOwnerId;
 }
 
@@ -41,7 +35,14 @@ export function deleteCardButton(cardElement) {
 }
 
 /*Функция создания карточек*/
-function createCard(nameValue, imgValue, idValue, numOfLikes) {
+export function createCard(
+  nameValue,
+  imgValue,
+  idValue,
+  user_idValue,
+  owner_idValue,
+  numOfLikes
+) {
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
@@ -54,18 +55,25 @@ function createCard(nameValue, imgValue, idValue, numOfLikes) {
   cardImage.setAttribute("alt", altName);
 
   /*Добавляем слушатель удаления карточки*/
-  cardElement
-    .querySelector(".card__delete-button")
-    .addEventListener("click", (evt) => {
-      const currentCardId = evt.target.closest(".card").getAttribute("id");
-      deleteCard(currentCardId)
-        .then(() => {
-          removeCard(evt);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
+
+  if (checkDeleteAbility(user_idValue, owner_idValue)) {
+    cardElement
+      .querySelector(".card__delete-button")
+      .addEventListener("click", (evt) => {
+        const currentCardId = evt.target.closest(".card").getAttribute("id");
+        deleteCard(currentCardId)
+          .then(() => {
+            removeCard(evt);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+  } else {
+    cardElement
+      .querySelector(".card__delete-button")
+      .classList.add("card__delete-button_hidden");
+  }
 
   /*Добавляем слушатель лайка*/
   cardElement
@@ -95,10 +103,19 @@ function cardFormSubmitHandler(evt) {
   cardForm.reset();
   addCard(cardName, cardLink)
     .then((cardObj) => {
-      renderCard(cardObj.name, cardObj.link);
+      renderCard(
+        createCard(
+          cardObj.name,
+          cardObj.link,
+          cardObj._id,
+          profileName.id,
+          cardObj.owner._id,
+          cardObj.likes.length
+        )
+      );
     })
     .catch((err) => {
-      console.log(err); // выводим ошибку в консоль
+      console.log(err);
     });
   /*Делаем кнопку неактивной*/
 

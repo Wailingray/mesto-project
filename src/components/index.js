@@ -5,12 +5,13 @@ import {
   cardFormSubmitHandler,
   cardForm,
   cardPopup,
+  createCard
 } from "./card.js";
 import { openPopup, closePopup, authorPopup } from "./modal.js";
 import { enableValidation } from "./validate.js";
 import { getUserData, getUserCards, patchUserInfo, apiConfig } from "./api";
 const profilePic = document.querySelector(".profile__avatar");
-const profileName = document.querySelector(".profile__name");
+export const profileName = document.querySelector(".profile__name");
 const jobName = document.querySelector(".profile__description");
 const editButton = document.querySelector(".button_type_edit");
 const addButton = document.querySelector(".button_type_add");
@@ -64,6 +65,9 @@ export const renderUserData = () => {
 
 /*Обновление данных профиля*/
 /* const updateUserInfo = ()
+export function createCard(
+  nameValue, imgValue, idValue
+  , user_idValue, owner_idValue, numOfLikes,  ) {
  */
 
 /*Добавляем начальные карточки*/
@@ -72,12 +76,14 @@ export const renderUserCards = () => {
     .then((cards) => {
       cards.forEach(function (item) {
         renderCard(
-          item.name,
-          item.link,
-          item._id,
-          item.owner._id,
-          profileName.id,
-          item.likes.length
+          createCard(
+            item.name,
+            item.link,
+            item._id,
+            profileName.id,
+            item.owner._id,
+            item.likes.length
+          )
         );
       });
     })
