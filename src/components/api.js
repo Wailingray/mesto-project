@@ -1,4 +1,4 @@
-const apiConfig = {
+export const apiConfig = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-1',
   headers: {
     'authorization': '0ce1a348-f8e4-4fce-80c6-e6b193b8791b',
@@ -16,13 +16,13 @@ const getResponse = (res) => {
 export const getUserData = () => {
   return fetch(`${apiConfig.baseUrl}/users/me`, {
     headers: apiConfig.headers
-  }).then(getResponse)
+  }).then(getResponse);
 }
 
 export const getUserCards = () => {
   return fetch(`${apiConfig.baseUrl}/cards`, {
     headers: apiConfig.headers
-  }).then(getResponse)
+  }).then(getResponse);
 }
 
 export const addCard = (cardName, cardLink) => {
@@ -33,7 +33,7 @@ export const addCard = (cardName, cardLink) => {
       name: cardName,
       link: cardLink
     })
-  }).then(getResponse)
+  }).then(getResponse);
 }
 
 export const deleteCard = (cardId) => {
@@ -43,4 +43,16 @@ export const deleteCard = (cardId) => {
   }).then((res) => {
     if (!res.ok) return Promise.reject(`Ошибка: ${res.status}`);
   })
+}
+
+
+export const patchUserInfo = (userName, userJob) => {
+  return fetch(`${apiConfig.baseUrl}/users/me`, {
+    method: 'PATCH',
+    headers: apiConfig.headers,
+    body: JSON.stringify({
+      name: userName,
+      about: userJob
+    })
+  }).then(getResponse);
 }

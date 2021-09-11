@@ -1,3 +1,4 @@
+
 import "./../pages/index.css";
 import {
   renderCard,
@@ -7,7 +8,7 @@ import {
 } from "./card.js";
 import { openPopup, closePopup, authorPopup } from "./modal.js";
 import { enableValidation } from "./validate.js";
-import { getUserData, getUserCards } from "./api";
+import { getUserData, getUserCards, patchUserInfo, apiConfig } from "./api";
 const profilePic = document.querySelector(".profile__avatar");
 const profileName = document.querySelector(".profile__name");
 const jobName = document.querySelector(".profile__description");
@@ -28,11 +29,18 @@ addButton.addEventListener("click", function () {
 // Обработчик «отправки» формы
 function authorFormSubmitHandler(evt) {
   evt.preventDefault();
-  profileName.textContent = authorNameInput.value;
-  jobName.textContent = jobInput.value;
+  patchUserInfo(authorNameInput.value, jobInput.value)
+    .then((userObj) => {
+      profileName.textContent = userObj.name;
+      jobName.textContent = userObj.about;
+      renderUserCards(); //обновляем имя автора карточек на всех его карточках
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   /*Обновляем value полей ввода*/
-  authorNameInput.setAttribute("value", authorNameInput.value);
-  jobInput.setAttribute("value", jobInput.value);
+  authorNameInput.setAttribute("value", profileName.textContent);
+  jobInput.setAttribute("value", jobName.textContent);
   /*Закрываем попап*/
   closePopup(authorPopup);
 }
@@ -49,8 +57,14 @@ const renderUserData = () => {
     profileName.textContent = data.name;
     profileName.setAttribute("id", data._id);
     jobName.textContent = data.about;
+    authorNameInput.setAttribute("value", data.name);
+    jobInput.setAttribute("value", data.about);
   });
 };
+
+/*Обновление данных профиля*/
+/* const updateUserInfo = ()
+ */
 
 /*Добавляем начальные карточки*/
 const renderUserCards = () => {
@@ -71,8 +85,9 @@ const renderUserCards = () => {
     });
 };
 
-renderUserData();
-renderUserCards();
+Promise.all(renderUserCards(), renderUserData());
+
+
 
 enableValidation({
   formSelector: ".popup__form",
