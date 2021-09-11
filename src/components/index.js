@@ -1,11 +1,10 @@
-
 import "./../pages/index.css";
 import {
   renderCard,
   cardFormSubmitHandler,
   cardForm,
   cardPopup,
-  createCard
+  createCard,
 } from "./card.js";
 import { openPopup, closePopup, authorPopup } from "./modal.js";
 import { enableValidation } from "./validate.js";
@@ -54,21 +53,36 @@ cardForm.addEventListener("submit", cardFormSubmitHandler);
 /*Отрисовка аватара*/
 export const renderUserData = () => {
   getUserData().then((data) => {
-    profilePic.setAttribute("src", data.avatar);
-    profileName.textContent = data.name;
-    profileName.setAttribute("id", data._id);
-    jobName.textContent = data.about;
-    authorNameInput.setAttribute("value", data.name);
-    jobInput.setAttribute("value", data.about);
+    setUserAttributes(data);
   });
 };
 
-/*Обновление данных профиля*/
-/* const updateUserInfo = ()
-export function createCard(
-  nameValue, imgValue, idValue
-  , user_idValue, owner_idValue, numOfLikes,  ) {
- */
+const setUserAttributes = (data) => {
+  profilePic.setAttribute("src", data.avatar);
+  profileName.textContent = data.name;
+  profileName.setAttribute("id", data._id);
+  jobName.textContent = data.about;
+  authorNameInput.setAttribute("value", data.name);
+  jobInput.setAttribute("value", data.about);
+};
+
+/*Начальный промис*/
+Promise.all([getUserData(), getUserCards()]).then(([data, cards]) => {
+  setUserAttributes(data);
+
+  cards.forEach(function (item) {
+    renderCard(
+      createCard(
+        item.name,
+        item.link,
+        item._id,
+        profileName.id,
+        item.owner._id,
+        item.likes.length
+      )
+    );
+  });
+});
 
 /*Добавляем начальные карточки*/
 export const renderUserCards = () => {
@@ -91,9 +105,6 @@ export const renderUserCards = () => {
       console.log(err);
     });
 };
-
-renderUserCards();
-renderUserData();
 
 enableValidation({
   formSelector: ".popup__form",
