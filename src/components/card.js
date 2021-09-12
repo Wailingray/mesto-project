@@ -35,13 +35,30 @@ function deleteLike(evt) {
   });
 }
 
-function toggleLike() {}
+function isLikedByMe (card) {
+  const cardLikeButton = card.querySelector(".card__like-button");
+  if(cardLikeButton.classList.contains("card__like-button_active")) {
+    return true;
+  }
+  else return false;
+}
+
+function toggleLike(evt) {
+  const eventTarget = evt.target;
+  const thisCard = eventTarget.closest(".card");
+  if(isLikedByMe(thisCard)) {
+    deleteLike(evt)
+  }
+  else {
+    addLike(evt)
+  }
+}
 
 function setLikeClass(button) {
   button.classList.add("card__like-button_active");
 }
 
-function removeLikeClass() {
+function removeLikeClass(button) {
   button.classList.remove("card__like-button_active");
 }
 
@@ -114,7 +131,7 @@ export function createCard(cardObj, ownerId) {
   }
 
   /*Добавляем слушатели лайка*/
-  cardLikeButton.addEventListener("click", addLike);
+  cardLikeButton.addEventListener("click", toggleLike);
 
   /*Добавляем слушатель настройки попапа*/
   cardImage.addEventListener("click", function () {
@@ -139,7 +156,7 @@ function cardFormSubmitHandler(evt) {
   cardForm.reset();
   addCard(cardName, cardLink)
     .then((cardObj) => {
-      renderCard(createCard(cardObj, profileName));
+      renderCard(createCard(cardObj, cardObj.owner._id));
     })
     .catch((err) => {
       console.log(err);
