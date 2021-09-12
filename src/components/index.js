@@ -7,7 +7,7 @@ import {
   createCard,
   renderLikes,
 } from "./card.js";
-import { openPopup, closePopup, authorPopup } from "./modal.js";
+import { openPopup, closePopup, authorPopup, avatarPopup } from "./modal.js";
 import { enableValidation } from "./validate.js";
 import { getUserData, getUserCards, patchUserInfo, apiConfig } from "./api";
 const profilePic = document.querySelector(".profile__avatar");
@@ -15,12 +15,17 @@ const profileName = document.querySelector(".profile__name");
 const jobName = document.querySelector(".profile__description");
 const editButton = document.querySelector(".button_type_edit");
 const addButton = document.querySelector(".button_type_add");
+const avatarEditButton = document.querySelector(".profile__avatar-button");
 const authorFormElement = authorPopup.querySelector(".popup__form");
 const authorNameInput = authorFormElement.elements.userName;
 const jobInput = authorFormElement.elements.userJob;
 
 editButton.addEventListener("click", function () {
   openPopup(authorPopup);
+});
+
+avatarEditButton.addEventListener("click", function () {
+  openPopup(avatarPopup);
 });
 
 addButton.addEventListener("click", function () {

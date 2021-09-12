@@ -3,8 +3,10 @@ import { imagePopup, cardPopup } from "./card.js";
 export const authorPopup = document.querySelector(".popup_type_author");
 const popupList = Array.from(document.querySelectorAll(".popup"));
 const authorCloseButton = document.querySelector(".button_type_author");
+export const avatarPopup = document.querySelector(".popup_type_avatar");
 const placeCloseButton = document.querySelector(".button_type_place");
 const imageCloseButton = document.querySelector(".button_type_image");
+const avatarCloseButton = document.querySelector(".button_type_avatar");
 
 /*Функции открытия/закрытия попапа*/
 export function openPopup(popupElement) {
@@ -31,6 +33,10 @@ placeCloseButton.addEventListener("click", function () {
 
 authorCloseButton.addEventListener("click", function () {
   closePopup(authorPopup);
+});
+
+avatarCloseButton.addEventListener("click", function () {
+  closePopup(avatarPopup);
 });
 
 imageCloseButton.addEventListener("click", function () {
