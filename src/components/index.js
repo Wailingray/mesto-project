@@ -9,7 +9,9 @@ import {
 } from "./card.js";
 import { openPopup, closePopup, authorPopup, avatarPopup } from "./modal.js";
 import { enableValidation } from "./validate.js";
-import { getUserData, getUserCards, patchUserInfo, apiConfig } from "./api";
+import { getUserData, getUserCards, patchUserInfo, patchAvatar } from "./api";
+import { setButtonState } from "./utils";
+
 const profilePic = document.querySelector(".profile__avatar");
 const profileName = document.querySelector(".profile__name");
 const jobName = document.querySelector(".profile__description");
@@ -17,8 +19,13 @@ const editButton = document.querySelector(".button_type_edit");
 const addButton = document.querySelector(".button_type_add");
 const avatarEditButton = document.querySelector(".profile__avatar-button");
 const authorFormElement = authorPopup.querySelector(".popup__form");
+const avatarFormElement = avatarPopup.querySelector(".popup__form");
 const authorNameInput = authorFormElement.elements.userName;
 const jobInput = authorFormElement.elements.userJob;
+const avatarUrlInput = avatarFormElement.elements.avatarPicture;
+const avatarUrl = document.querySelector(".profile__avatar");
+const authorSubmitButton = authorFormElement.querySelector(".popup__button");
+const avatarSubmitButton = avatarFormElement.querySelector(".popup__button");
 
 editButton.addEventListener("click", function () {
   openPopup(authorPopup);
@@ -32,36 +39,46 @@ addButton.addEventListener("click", function () {
   openPopup(cardPopup);
 });
 
-// Обработчик «отправки» формы
 function authorFormSubmitHandler(evt) {
   evt.preventDefault();
+  setButtonState(authorSubmitButton, true);
   patchUserInfo(authorNameInput.value, jobInput.value)
     .then((userObj) => {
       profileName.textContent = userObj.name;
       jobName.textContent = userObj.about;
-      renderUserCards(); //обновляем имя автора карточек на всех его карточках
+      authorNameInput.setAttribute("value", profileName.textContent);
+      jobInput.setAttribute("value", jobName.textContent);
+      closePopup(authorPopup);
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      setButtonState(authorSubmitButton, false);
     });
-  /*Обновляем value полей ввода*/
-  authorNameInput.setAttribute("value", profileName.textContent);
-  jobInput.setAttribute("value", jobName.textContent);
-  /*Закрываем попап*/
-  closePopup(authorPopup);
+}
+
+function avatarFormSubmitHandler(evt) {
+  evt.preventDefault();
+  setButtonState(avatarSubmitButton, true);
+  patchAvatar(avatarUrlInput.value)
+    .then((userObj) => {
+      avatarUrl.setAttribute("src", userObj.avatar);
+      closePopup(avatarPopup);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      setButtonState(avatarSubmitButton, false);
+    });
 }
 
 authorFormElement.addEventListener("submit", authorFormSubmitHandler);
 
-/*Обработчик формы*/
 cardForm.addEventListener("submit", cardFormSubmitHandler);
 
-/*Отрисовка аватара*/
-/* export const renderUserData = () => {
-  getUserData().then((data) => {
-    setUserAttributes(data);
-  });
-}; */
+avatarFormElement.addEventListener("submit", avatarFormSubmitHandler);
 
 const setUserAttributes = (data) => {
   profilePic.setAttribute("src", data.avatar);
@@ -78,28 +95,6 @@ Promise.all([getUserData(), getUserCards()]).then(([data, cards]) => {
     renderCard(renderLikes(data._id, item.likes, createCard(item, data._id)));
   });
 });
-
-/*Добавляем начальные карточки*/
-/* export const renderUserCards = () => {
-  getUserCards()
-    .then((cards) => {
-      cards.forEach(function (item) {
-        renderCard(
-          createCard(
-            item.name,
-            item.link,
-            item._id,
-            profileName.id,
-            item.owner._id,
-            item.likes.length
-          )
-        );
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}; */
 
 enableValidation({
   formSelector: ".popup__form",

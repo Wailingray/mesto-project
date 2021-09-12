@@ -1,11 +1,11 @@
 import { openPopup, closePopup } from "./modal.js";
-import { toggleButtonState } from "./utils.js";
+import { toggleButtonState, setButtonState } from "./utils.js";
 import { addCard, deleteCard, putLike, removeLike } from "./api.js";
-import { renderUserData } from "./index.js";
 const imagePopup = document.querySelector(".popup_type_image");
 const popupImage = imagePopup.querySelector(".popup__image");
 const cardForm = document.querySelector(".popup_type_card .popup__form");
 const cardPopup = document.querySelector(".popup_type_card");
+const cardButton = cardForm.querySelector(".popup__button");
 
 
 function removeCard(evt) {
@@ -146,9 +146,9 @@ export function createCard(cardObj, ownerId) {
 
 /*Функция добавления новой карточки*/
 function cardFormSubmitHandler(evt) {
+  setButtonState(cardButton, true)
   evt.preventDefault();
   const cardInputs = Array.from(cardForm.querySelectorAll(".popup__item"));
-  const cardButton = cardForm.querySelector(".popup__button");
   const placeNameInput = cardForm.querySelector("#placeName-input");
   const picInput = cardForm.querySelector("#url-input");
   const cardName = placeNameInput.value;
@@ -157,17 +157,17 @@ function cardFormSubmitHandler(evt) {
   addCard(cardName, cardLink)
     .then((cardObj) => {
       renderCard(createCard(cardObj, cardObj.owner._id));
+      closePopup(cardPopup);
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      setButtonState(cardButton, false);
+      toggleButtonState(cardInputs, cardButton, {
+        inactiveButtonClass: "popup__button_disabled"
+      });
     });
-  /*Делаем кнопку неактивной*/
-
-  toggleButtonState(cardInputs, cardButton, {
-    inactiveButtonClass: "popup__button_disabled",
-  });
-  /*Закрываем попап*/
-  closePopup(cardPopup);
 }
 
 export { imagePopup, cardForm, cardPopup, renderCard, cardFormSubmitHandler };

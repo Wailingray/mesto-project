@@ -72,3 +72,13 @@ export const patchUserInfo = (userName, userJob) => {
     })
   }).then(getResponse);
 }
+
+export const patchAvatar = (avatarLink) => {
+  return fetch(`${apiConfig.baseUrl}/users/me/avatar`, {
+    method: 'PATCH',
+    headers: apiConfig.headers,
+    body: JSON.stringify({
+      avatar: avatarLink
+    })
+  }).then(getResponse);
+}

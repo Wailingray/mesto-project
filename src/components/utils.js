@@ -13,3 +13,8 @@ export const toggleButtonState = (
     buttonElement.removeAttribute("disabled", "disabled");
   }
 };
+
+export const setButtonState = (button, isSending) => {
+  button.disabled = isSending;
+  button.textContent = isSending ? 'Сохранение...' : 'Сохранить';
+}
