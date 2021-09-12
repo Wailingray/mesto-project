@@ -1,11 +1,12 @@
 import { openPopup, closePopup } from "./modal.js";
 import { toggleButtonState } from "./utils.js";
 import { addCard, deleteCard, putLike, removeLike } from "./api.js";
-import { profileName, renderUserData } from "./index.js";
+import { renderUserData } from "./index.js";
 const imagePopup = document.querySelector(".popup_type_image");
 const popupImage = imagePopup.querySelector(".popup__image");
 const cardForm = document.querySelector(".popup_type_card .popup__form");
 const cardPopup = document.querySelector(".popup_type_card");
+
 
 function removeCard(evt) {
   const eventTarget = evt.target;
@@ -17,7 +18,7 @@ function addLike(evt) {
   const thisCard = eventTarget.closest(".card");
   const targetCardId = thisCard.getAttribute("id");
   putLike(targetCardId).then((data) => {
-    eventTarget.classList.add("card__like-button_active");
+    setLikeClass(eventTarget);
     thisCard.querySelector(".card__like-counter").textContent =
       data.likes.length;
   });
@@ -28,15 +29,36 @@ function deleteLike(evt) {
   const thisCard = eventTarget.closest(".card");
   const targetCardId = thisCard.getAttribute("id");
   removeLike(targetCardId).then((data) => {
-    eventTarget.classList.remove("card__like-button_active");
+    removeLikeClass(eventTarget);
     thisCard.querySelector(".card__like-counter").textContent =
       data.likes.length;
   });
 }
 
-function toggleLike() {
+function toggleLike() {}
 
+function setLikeClass(button) {
+  button.classList.add("card__like-button_active");
 }
+
+function removeLikeClass() {
+  button.classList.remove("card__like-button_active");
+}
+
+/*Проверка состояния лайка*/
+function checkLikeState (likesArray, ownerId) {
+  return likesArray.some(function(el) {
+    return el._id === ownerId;
+  });
+}
+
+export function renderLikes (userId, likesArray, cardElement) {
+  if (checkLikeState(likesArray, userId)) {
+    setLikeClass(cardElement.querySelector(".card__like-button"));
+  }
+  return cardElement;
+}
+
 
 /*Функция добавления карточки в DOM*/
 function renderCard(cardElement) {
@@ -56,28 +78,23 @@ export function deleteCardButton(cardElement) {
 }
 
 /*Функция создания карточек*/
-export function createCard(
-  nameValue,
-  imgValue,
-  idValue,
-  user_idValue,
-  owner_idValue,
-  numOfLikes
-) {
+export function createCard(cardObj, ownerId) {
   const cardTemplate = document.querySelector("#card-template").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
   const likesCount = cardElement.querySelector(".card__like-counter");
-  cardElement.setAttribute("id", idValue);
-  cardImage.setAttribute("src", imgValue);
-  cardElement.querySelector(".card__title").textContent = nameValue;
-  likesCount.textContent = numOfLikes;
-  const altName = `Фотография местности: ${nameValue}`;
+  const cardLikeButton = cardElement.querySelector(".card__like-button");
+  cardElement.setAttribute("id", cardObj._id);
+  cardImage.setAttribute("src", cardObj.link);
+  cardElement.querySelector(".card__title").textContent = cardObj.name;
+
+  likesCount.textContent = cardObj.likes.length;
+  const altName = `Фотография местности: ${cardObj.name}`;
   cardImage.setAttribute("alt", altName);
 
   /*Добавляем слушатель удаления карточки*/
 
-  if (checkDeleteAbility(user_idValue, owner_idValue)) {
+  if (checkDeleteAbility(ownerId, cardObj.owner._id)) {
     cardElement
       .querySelector(".card__delete-button")
       .addEventListener("click", (evt) => {
@@ -97,15 +114,13 @@ export function createCard(
   }
 
   /*Добавляем слушатели лайка*/
-  cardElement
-    .querySelector(".card__like-button")
-    .addEventListener("click", addLike);
+  cardLikeButton.addEventListener("click", addLike);
 
   /*Добавляем слушатель настройки попапа*/
   cardImage.addEventListener("click", function () {
-    popupImage.setAttribute("src", imgValue);
+    popupImage.setAttribute("src", cardObj.link);
     popupImage.setAttribute("alt", altName);
-    imagePopup.querySelector(".popup__figcaption").textContent = nameValue;
+    imagePopup.querySelector(".popup__figcaption").textContent = cardObj.name;
     openPopup(imagePopup);
   });
 
@@ -124,16 +139,7 @@ function cardFormSubmitHandler(evt) {
   cardForm.reset();
   addCard(cardName, cardLink)
     .then((cardObj) => {
-      renderCard(
-        createCard(
-          cardObj.name,
-          cardObj.link,
-          cardObj._id,
-          profileName.id,
-          cardObj.owner._id,
-          cardObj.likes.length
-        )
-      );
+      renderCard(createCard(cardObj, profileName));
     })
     .catch((err) => {
       console.log(err);

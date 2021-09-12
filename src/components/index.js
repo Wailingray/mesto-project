@@ -5,12 +5,13 @@ import {
   cardForm,
   cardPopup,
   createCard,
+  renderLikes,
 } from "./card.js";
 import { openPopup, closePopup, authorPopup } from "./modal.js";
 import { enableValidation } from "./validate.js";
 import { getUserData, getUserCards, patchUserInfo, apiConfig } from "./api";
 const profilePic = document.querySelector(".profile__avatar");
-export const profileName = document.querySelector(".profile__name");
+const profileName = document.querySelector(".profile__name");
 const jobName = document.querySelector(".profile__description");
 const editButton = document.querySelector(".button_type_edit");
 const addButton = document.querySelector(".button_type_add");
@@ -51,16 +52,15 @@ authorFormElement.addEventListener("submit", authorFormSubmitHandler);
 cardForm.addEventListener("submit", cardFormSubmitHandler);
 
 /*Отрисовка аватара*/
-export const renderUserData = () => {
+/* export const renderUserData = () => {
   getUserData().then((data) => {
     setUserAttributes(data);
   });
-};
+}; */
 
 const setUserAttributes = (data) => {
   profilePic.setAttribute("src", data.avatar);
   profileName.textContent = data.name;
-  profileName.setAttribute("id", data._id);
   jobName.textContent = data.about;
   authorNameInput.setAttribute("value", data.name);
   jobInput.setAttribute("value", data.about);
@@ -69,23 +69,13 @@ const setUserAttributes = (data) => {
 /*Начальный промис*/
 Promise.all([getUserData(), getUserCards()]).then(([data, cards]) => {
   setUserAttributes(data);
-
   cards.forEach(function (item) {
-    renderCard(
-      createCard(
-        item.name,
-        item.link,
-        item._id,
-        profileName.id,
-        item.owner._id,
-        item.likes.length
-      )
-    );
+    renderCard(renderLikes(data._id, item.likes, createCard(item, data._id)));
   });
 });
 
 /*Добавляем начальные карточки*/
-export const renderUserCards = () => {
+/* export const renderUserCards = () => {
   getUserCards()
     .then((cards) => {
       cards.forEach(function (item) {
@@ -104,7 +94,7 @@ export const renderUserCards = () => {
     .catch((err) => {
       console.log(err);
     });
-};
+}; */
 
 enableValidation({
   formSelector: ".popup__form",
