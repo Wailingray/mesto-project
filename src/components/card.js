@@ -13,22 +13,20 @@ function removeCard(evt) {
   eventTarget.closest(".card").remove();
 }
 
-function addLike(evt) {
+function addLike(evt, cardId) {
   const eventTarget = evt.target;
   const thisCard = eventTarget.closest(".card");
-  const targetCardId = thisCard.getAttribute("id");
-  putLike(targetCardId).then((data) => {
+  putLike(cardId).then((data) => {
     setLikeClass(eventTarget);
     thisCard.querySelector(".card__like-counter").textContent =
       data.likes.length;
   });
 }
 
-function deleteLike(evt) {
+function deleteLike(evt, cardId) {
   const eventTarget = evt.target;
   const thisCard = eventTarget.closest(".card");
-  const targetCardId = thisCard.getAttribute("id");
-  removeLike(targetCardId).then((data) => {
+  removeLike(cardId).then((data) => {
     removeLikeClass(eventTarget);
     thisCard.querySelector(".card__like-counter").textContent =
       data.likes.length;
@@ -43,14 +41,14 @@ function isLikedByMe (card) {
   else return false;
 }
 
-function toggleLike(evt) {
+function toggleLike(evt, cardId) {
   const eventTarget = evt.target;
   const thisCard = eventTarget.closest(".card");
   if(isLikedByMe(thisCard)) {
-    deleteLike(evt)
+    deleteLike(evt, cardId)
   }
   else {
-    addLike(evt)
+    addLike(evt, cardId)
   }
 }
 
@@ -101,7 +99,6 @@ export function createCard(cardObj, ownerId) {
   const cardImage = cardElement.querySelector(".card__image");
   const likesCount = cardElement.querySelector(".card__like-counter");
   const cardLikeButton = cardElement.querySelector(".card__like-button");
-  cardElement.setAttribute("id", cardObj._id);
   cardImage.setAttribute("src", cardObj.link);
   cardElement.querySelector(".card__title").textContent = cardObj.name;
 
@@ -131,7 +128,9 @@ export function createCard(cardObj, ownerId) {
   }
 
   /*Добавляем слушатели лайка*/
-  cardLikeButton.addEventListener("click", toggleLike);
+  cardLikeButton.addEventListener("click", function (evt) {
+    toggleLike(evt, cardObj._id);
+  });
 
   /*Добавляем слушатель настройки попапа*/
   cardImage.addEventListener("click", function () {
