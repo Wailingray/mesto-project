@@ -22,7 +22,6 @@ export function closePopup(popupElement) {
 function closePopupOnEsc(evt) {
   if (evt.key === "Escape") {
     closePopup(document.querySelector(".popup_opened"));
-    removeClosePopupOnEscListener();
   }
 }
 
@@ -48,7 +47,6 @@ popupList.forEach((element) =>
   element.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("popup_opened")) {
       closePopup(evt.target);
-      removeClosePopupOnEscListener();
     }
   })
 );

@@ -90,14 +90,14 @@ const setUserAttributes = (data) => {
 
 /*Начальный промис*/
 Promise.all([getUserData(), getUserCards()]).then(([data, cards]) => {
-  setUserAttributes(data);
-  cards.forEach(function (item) {
-    renderCard(renderLikes(data._id, item.likes, createCard(item, data._id)));
+    setUserAttributes(data);
+    cards.reverse().forEach(function (item) {
+      renderCard(renderLikes(data._id, item.likes, createCard(item, data._id)));
+    })
   })
   .catch((err) => {
     console.log(err);
   });
-});
 
 enableValidation({
   formSelector: ".popup__form",
