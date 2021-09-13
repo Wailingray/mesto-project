@@ -20,11 +20,14 @@
     </header>
     <main>
       <section class="profile page__section">
-        <img
+        <div class="profile__avatar-container">
+          <img
           src="<%=require('./images/avatar.jpg')%>"
-          alt="Ваша фотография (по умолчанию тут фото Жака Кусто)"
+          alt="Ваша фотография"
           class="profile__avatar"
         />
+        <button class="button profile__avatar-button"></button>
+        </div>
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button
@@ -139,13 +142,42 @@
         ></button>
       </div>
     </div>
+    <div class="popup popup_type_avatar">
+      <div class="popup__container">
+        <form class="popup__form" name="editForm" novalidate>
+          <h2 class="popup__title">Обновить аватар</h2>
+          <fieldset class="popup__fieldset">
+            <input
+              class="popup__item"
+              type="url"
+              id="url-avatar-input"
+              name="avatarPicture"
+              required
+              placeholder="Ссылка на картинку"
+              value=""
+            />
+            <span class="popup__item-error url-avatar-input-error"></span>
+            <button class="popup__button button" type="submit">
+              Сохранить
+            </button>
+          </fieldset>
+        </form>
+        <button
+          class="button button_type_close button_type_avatar"
+          type="button"
+        ></button>
+      </div>
+    </div>
     <template id="card-template">
       <article class="card">
-        <img src="" alt="фотография места" class="card__image" />
         <button class="button card__delete-button" type="button"></button>
+        <img src="" alt="фотография места" class="card__image" />
         <div class="card__caption">
           <h2 class="card__title"></h2>
-          <button class="button card__like-button" type="button"></button>
+          <div class="card__like-container">
+            <button class="button card__like-button" type="button"></button>
+            <p class="card__like-counter"></p>
+          </div>
         </div>
       </article>
     </template>
