@@ -74,7 +74,6 @@ export function renderLikes (userId, likesArray, cardElement) {
   return cardElement;
 }
 
-
 /*Функция добавления карточки в DOM*/
 function renderCard(cardElement) {
   const cardContainer = document.querySelector(".cards");
@@ -84,12 +83,6 @@ function renderCard(cardElement) {
 /*Функция проверки на возможность удаления карточки*/
 function checkDeleteAbility(userId, cardOwnerId) {
   return userId === cardOwnerId;
-}
-
-/*Функция удаления кнопки из разметки карточки*/
-export function deleteCardButton(cardElement) {
-  cardElement.querySelector(".card__delete-button").remove();
-  return cardElement;
 }
 
 /*Функция создания карточек*/

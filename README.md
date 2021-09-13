@@ -10,6 +10,6 @@
 
 ## Технологии
 
-HTML5 (адаптивная вёрстка), CSS3 (grid, flex), JavaScript, Webpack
+HTML5 (адаптивная вёрстка), CSS3 (grid, flex), JavaScript, Webpack, Взаимодействие с сервером.
 
 
