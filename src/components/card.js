@@ -20,6 +20,9 @@ function addLike(evt, cardId) {
     setLikeClass(eventTarget);
     thisCard.querySelector(".card__like-counter").textContent =
       data.likes.length;
+  })
+  .catch((err) => {
+    console.log(err);
   });
 }
 
@@ -30,6 +33,9 @@ function deleteLike(evt, cardId) {
     removeLikeClass(eventTarget);
     thisCard.querySelector(".card__like-counter").textContent =
       data.likes.length;
+  })
+  .catch((err) => {
+    console.log(err);
   });
 }
 
@@ -77,7 +83,7 @@ export function renderLikes (userId, likesArray, cardElement) {
 /*Функция добавления карточки в DOM*/
 function renderCard(cardElement) {
   const cardContainer = document.querySelector(".cards");
-  cardContainer.append(cardElement);
+  cardContainer.prepend(cardElement);
 }
 
 /*Функция проверки на возможность удаления карточки*/
@@ -144,10 +150,10 @@ function cardFormSubmitHandler(evt) {
   const picInput = cardForm.querySelector("#url-input");
   const cardName = placeNameInput.value;
   const cardLink = picInput.value;
-  cardForm.reset();
   addCard(cardName, cardLink)
     .then((cardObj) => {
       renderCard(createCard(cardObj, cardObj.owner._id));
+      cardForm.reset();
       closePopup(cardPopup);
     })
     .catch((err) => {

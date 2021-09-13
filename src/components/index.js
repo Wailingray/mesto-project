@@ -46,8 +46,8 @@ function authorFormSubmitHandler(evt) {
     .then((userObj) => {
       profileName.textContent = userObj.name;
       jobName.textContent = userObj.about;
-      authorNameInput.setAttribute("value", profileName.textContent);
-      jobInput.setAttribute("value", jobName.textContent);
+      authorNameInput.value = profileName.textContent;
+      jobInput.value = jobName.textContent;
       closePopup(authorPopup);
     })
     .catch((err) => {
@@ -93,6 +93,9 @@ Promise.all([getUserData(), getUserCards()]).then(([data, cards]) => {
   setUserAttributes(data);
   cards.forEach(function (item) {
     renderCard(renderLikes(data._id, item.likes, createCard(item, data._id)));
+  })
+  .catch((err) => {
+    console.log(err);
   });
 });
 
